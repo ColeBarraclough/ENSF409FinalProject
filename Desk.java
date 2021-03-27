@@ -1,38 +1,36 @@
 package edu.ucalgary.ensf409;
 
-public class Chair {
+public class Desk {
     private String id;
     private String type;
     private boolean legs;
-    private boolean arms;
-    private boolean seat;
-    private boolean cushion;
+    private boolean top;
+    private boolean drawer;
     private int price;
     private String manuId;
 
 
-    public Chair() {
+    public Desk() {
         id = "";
         type = "";
         legs = false;
-        arms = false;
-        seat = false;
-        cushion = false;
+        top = false;
+        drawer = false;
         price = 0;
         manuId = "";
 
     }
 
-    public Chair(String id, String type, String legs, String arms, String seat, String cushion, int price, String manuId) {
+    public Desk(String id, String type, String legs, String top, String drawer, int price, String manuId) {
         this.id = id;
         this.type = type;
         this.legs = TorF(legs);
-        this.arms = TorF(arms);
-        this.seat = TorF(seat);
-        this.cushion = TorF(cushion);
+        this.top = TorF(top);
+        this.drawer = TorF(drawer);
         this.price = price;
         this.manuId = manuId;
     }
+    
     private boolean TorF(String input) {
     	if(input.equals("Y")) {
     		return true;
@@ -41,6 +39,7 @@ public class Chair {
     		return false;
     	}
     }
+
     public String getId() {
         return id;
     }
@@ -57,18 +56,15 @@ public class Chair {
     public boolean getLegs() {
         return legs;
     }
-    public boolean getArms() {
-        return arms;
+    public boolean getTop() {
+        return top;
     }
-    public boolean getSeat() {
-        return seat;
-    }
-    public boolean getCushion() {
-        return cushion;
+    public boolean getDrawer() {
+        return drawer;
     }
 
     public String toString() {
 
-        return "Chair = "  + id + ", " + type + ", " + legs + ", " + arms + ", " + seat + ", " + cushion + ", " + price+ ", " + manuId;
+        return "Desk = "  + id + ", " + type + ", " + legs + ", " + top + ", " + drawer + ", " + price + ", " + manuId;
     }
 }
