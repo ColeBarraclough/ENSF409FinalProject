@@ -21,16 +21,36 @@ public class Test {
         chairs[1] = chairTwo;
         chairs[2] = chairThree;
 
-        Chair[][] allSubsets = mb.findAllSubsets(chairs);
+        ArrayList<Chair> cheapestArray = mb.calculateLowestPrice(chairs);
 
 
-        for (int i = 0; i < allSubsets.length; i++) {
-            System.out.print("{");
-            for (int j = 0; j < allSubsets[i].length; j++) {
-                System.out.println(allSubsets[i][j].getId());
-            }
-            System.out.println("}");
+        // for (int i = 0; i < allSubsets.length; i++) {
+        //     System.out.print("{");
+        //     for (int j = 0; j < allSubsets[i].length; j++) {
+        //         System.out.println(allSubsets[i][j].getId());
+        //     }
+        //     System.out.println("}");
+        // }
+
+        // ArrayList<ArrayList<Chair>> workingArrays = mb.checkArray(allSubsets);
+        // System.out.println("");
+        // System.out.println("");
+        // for (int i = 0; i < workingArrays.size(); i++) {
+        //     System.out.print("{");
+        //     for (int j = 0; j < workingArrays.get(i).size(); j++) {
+        //         System.out.println(workingArrays.get(i).get(j).getId());
+        //     }
+        //     System.out.println("}");
+        // }
+
+        // ArrayList<Chair> cheapestArray = mb.findCheapestOption(workingArrays);
+        // System.out.println("");
+        // System.out.println("");
+
+        for (int i = 0; i < cheapestArray.size(); i++) {
+            System.out.println(cheapestArray.get(i).getId());
         }
+
         // System.out.println("done");
     }
     

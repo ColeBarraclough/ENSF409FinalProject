@@ -1,88 +1,46 @@
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 
 public class FurnatureBuilder {
     // Takes in an ArrayList that contians all of the chairs of that requested type
-    public void calculateLowestPrice(ArrayList<Chair> list) {
-        ArrayList<Chair> chairList = new ArrayList<Chair>();
-        
-
+    public ArrayList<Chair> calculateLowestPrice(Chair[] list) {
+        return findCheapestOption(checkArray(findAllSubsets(list)));
     }
 
-    // public ArrayList<Chair> findAllChairs(ArrayList<Chair> chairs, int element) {
-    //     if (chairs.size() == 0) {
-    //         return chairs;
-    //     }
+    public ArrayList<Chair> findCheapestOption(ArrayList<ArrayList<Chair>> myArray) {
+        ArrayList<Chair> cheapestList = new ArrayList<Chair>();
+        int cheapest = -1;
+        for (int i = 0; i < myArray.size(); i++) {
+            int price = 0;
+            for (int j = 0; j < myArray.get(i).size(); j++) {
+                price += myArray.get(i).get(j).getPrice();
+            }
+            if (price < cheapest || cheapest < 0) {
+                cheapest = price;
+                cheapestList = myArray.get(i);
+            }
+        }
+        return cheapestList;
+    }
 
-    //     ArrayList<Chair> completeChairs = new ArrayList<Chair>();
-    //     completeChairs = findAllForOneElement(chairs, element);
-    //     completeChairs = findAllChairs(new ArrayList<Chair>(chairs.subList(1, chairs.size() - 1)), element);
-    //     return completeChairs;
-    // }
-
-    // public ArrayList<Chair> findAllForOneElement(ArrayList<Chair> chairs, int elements) {
-    //     if (chairs.size() == 1) {
-    //         return new ArrayList<Chair>();
-    //     }
-
-    //     ArrayList<Chair> completeChairs = new ArrayList<Chair>();
-
-    //     Chair myChair = new Chair(chairs.get(element));
-
-    //     for (int i = 0; i <= chairs.size(); i++) {
-    //         if (myChair.isComplete()) {
-    //             System.out.println("here");
-    //             completeChairs.add(myChair);
-    //             break;
-    //         }
-
-    //         if (i == element) {
-    //             i++;
-    //         }
-    //         System.out.println(myChair.toString());
-
-    //         if (!myChair.getLegs()) {
-    //             if (chairs.get(i).getLegs()) {
-    //                 myChair.addBuildup(chairs.get(i));
-    //                 myChair.setLegs(true);
-    //             }
-    //         }
-    //         if (!myChair.getArms()) {
-    //             if (chairs.get(i).getArms()) {
-    //                 myChair.addBuildup(chairs.get(i));
-    //                 myChair.setArms(true);
-    //             }
-    //         }
-    //         if (!myChair.getSeat()) {
-    //             if (chairs.get(i).getSeat()) {
-    //                 myChair.addBuildup(chairs.get(i));
-    //                 myChair.setSeat(true);
-    //             }
-    //         }
-    //         if (!myChair.getCushion()) {
-    //             if (chairs.get(i).getCushion()) {
-    //                 myChair.addBuildup(chairs.get(i));
-    //                 myChair.setCushion(true);
-    //             }
-    //         }
-    //     }
-
-    //     if (!myChair.isComplete()) {
-    //         return new ArrayList<Chair>();
-    //     }
-        
-    //     ArrayList<Chair> buildupChairs = myChair.getBuildup();
-    //     for (int i = 1; i < buildupChairs.size(); i++) {
-    //         System.out.println("bb = " + buildupChairs.get(i).toString());
-    //         chairs.remove(buildupChairs.get(i));
-    //     }
-        
-    //     completeChairs.addAll(findAllForOneElement(chairs, element));
-    //     return completeChairs;
-    // }
-
-    public Chair[][] checkArray(Chair[][] myArray) {
-        return null;
+    public ArrayList<ArrayList<Chair>> checkArray(Chair[][] myArray) {
+        ArrayList<ArrayList<Chair>> workingChairs = new ArrayList<ArrayList<Chair>>();
+        for (int i = 0; i < myArray.length; i++) {
+            boolean legs = false;
+            boolean arms = false;
+            boolean seat = false;
+            boolean cushion = false;
+            for (int j = 0; j < myArray[i].length; j++) {
+                legs = myArray[i][j].getLegs() || legs;
+                arms = myArray[i][j].getArms() || arms;
+                seat = myArray[i][j].getSeat() || seat;
+                cushion = myArray[i][j].getCushion() || cushion;
+            }
+            if (legs && arms && seat && cushion) {
+                workingChairs.add(new ArrayList<Chair>(Arrays.asList(myArray[i])));
+            }
+        }
+        return workingChairs;
     }
 
 
