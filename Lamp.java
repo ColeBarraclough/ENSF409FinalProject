@@ -1,65 +1,23 @@
 package edu.ucalgary.ensf409;
 
-public class Lamp {
-    private String id;
-    private String type;
+public class Lamp extends Furniture {
     private boolean base;
     private boolean bulb;
-    private int price;
-    private String manuId;
-
 
     public Lamp() {
-        id = "";
-        type = "";
-        base = false;
-        bulb = false;
-        price = 0;
-        manuId = "";
-
+        super();
     }
 
     public Lamp(String id, String type, String base, String bulb,  int price, String manuId) {
-        this.id = id;
-        this.type = type;
-        this.base = TorF(base);
-        this.bulb = TorF(bulb);
-        this.price = price;
-        this.manuId = manuId;
-    }
-    
-    private boolean TorF(String input) {
-    	if(input.equals("Y")) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+        super(id, type, new String[]{base, bulb}, price, manuId);
+        this.base = super.torF(base);
+        this.bulb = super.torF(bulb);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-    public String manuId() {
-    	return manuId;
-    }
-    public String getType() {
-        return type;
-    }
     public boolean getBase() {
         return base;
     }
     public boolean getBulb() {
         return bulb;
-    }
-
-
-    public String toString() {
-
-        return "Lamp = "  + id + ", " + type + ", " + base + ", " + bulb + ", "  + price + ", " + manuId;
     }
 }
