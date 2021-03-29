@@ -183,6 +183,26 @@ public class Management {
 	 
  }
 	
+	public String selectAllManufacturers() {
+		StringBuilder names = new StringBuilder();
+		
+		try {
+			Statement stmt = dbConnect.createStatement();
+			results = stmt.executeQuery("SELECT Name FROM Manufacturer");
+			
+			while(results.next()) {
+				names.append(results.getString());
+				names.append("\n");
+			}
+			stmt.close();
+		}catch(SQLException e) {
+			System.out.println("Could not access the MANUFACTURER Table");
+		}
+		
+		return names.toString();
+
+	}
+	
 	public static void main(String[] args) {
 
 		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
