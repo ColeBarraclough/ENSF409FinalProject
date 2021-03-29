@@ -3,6 +3,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+
+/**
+ * 
+ * @author Adeshpal Virk
+ * @since March 27, 2021
+ * @version 1.0
+ * {@summary} This class connects to the database and is used to retrieve data within the database.
+ *
+ */
+
 public class Management {
 	
 	/**
@@ -17,14 +27,36 @@ public class Management {
      * user's account password
      */
     public final String PASSWORD; //store the user's account password
+    /**
+     * connection to database
+     */
     private Connection dbConnect;
+    /**
+     * results from database
+     */
     private ResultSet results;
-    ArrayList<String> id = new ArrayList<>(); // Stores id's for current furniture type.
-    
-    ArrayList<Chair> chairList = new ArrayList<Chair>();
-    ArrayList<Desk> deskList = new ArrayList<Desk>();
-    ArrayList<Filing> filingList = new ArrayList<Filing>();
-    ArrayList<Lamp> lampList = new ArrayList<Lamp>();
+    /**
+     * results from database
+     */
+   // ArrayList<String> id = new ArrayList<>(); // Stores id's for current furniture type.
+    /**
+     * ArrayList of Furniture objects
+     */
+    ArrayList<Furniture> list = new ArrayList<Furniture>();
+    /**
+     * Array of Furniture objects.
+     */
+    Furniture[] list3;
+    /**
+     * Converts ArrayList to Array.
+     */
+    public void toArray() {
+    	list3 = new Furniture[list.size()];
+    	for(int i=0; i< list.size();i++) {
+    		list3[i] = list.get(i);
+    	}
+    }
+
     
     /**
      * The constructor does not use the database.
@@ -58,6 +90,9 @@ public class Management {
 	public String getPassword() {
 		return this.PASSWORD;
 	}
+	/**
+	 * Establishes a connection to the database.
+	 */
 	public void initializeConnection() {
 		
         try{
@@ -66,6 +101,10 @@ public class Management {
             System.out.println("Could not establish a connection to database.");
         }
     }
+	/**
+	 * Creates a Chair object and adds it to an ArrayList of Furniture.
+	 * @param type Determines which type of chair is requested.
+	 */
 	public void chairArray(String type) {
 		try {               
 			Statement myStmt = dbConnect.createStatement();
@@ -81,7 +120,7 @@ public class Management {
 							results.getString("Cushion"),
 							results.getInt("Price"),
 							results.getString("ManuID"));
-					chairList.add(temp);
+					list.add(temp);
 				}
                 
 			}
@@ -92,6 +131,11 @@ public class Management {
 		}
 		return ;
 	}
+	/**
+	 * Creates a Desk object and adds it to an ArrayList of Furniture.
+	 * 
+	 * @param type Determines which type of desk is requested.
+	 */
 	public void deskArray(String type) {
 		try {               
 			Statement myStmt = dbConnect.createStatement();
@@ -106,7 +150,7 @@ public class Management {
 							results.getString("Drawer"),
 							results.getInt("Price"),
 							results.getString("ManuID"));
-					deskList.add(temp);
+					list.add(temp);
 				}
                 
 			}
@@ -117,6 +161,10 @@ public class Management {
 		}
 		return ;
 	}
+	/**
+	 * Creates a Filing object and adds it to an ArrayList of Furniture.
+	 * @param type Determines which type of filing is requested.
+	 */
 	public void filingArray(String type) {
 		try {               
 			Statement myStmt = dbConnect.createStatement();
@@ -131,7 +179,7 @@ public class Management {
 							results.getString("Cabinet"),
 							results.getInt("Price"),
 							results.getString("ManuID"));
-					filingList.add(temp);
+					list.add(temp);
 				}
                 
 			}
@@ -142,7 +190,13 @@ public class Management {
 		}
 		return ;
 	}
+	
+	/**
+	 * Creates a Lamp object and adds it to an ArrayList of Furniture.
+	 * @param type Determines which type of lamp is requested.
+	 */
 	public void lampArray(String type) {
+		System.out.println(type);
 		try {               
 			Statement myStmt = dbConnect.createStatement();
 			String query = "SELECT * FROM lamp";
@@ -155,7 +209,7 @@ public class Management {
 							results.getString("Bulb"),
 							results.getInt("Price"),
 							results.getString("ManuID"));
-					lampList.add(temp);
+					list.add(temp);
 				}
                 
 			}
@@ -166,58 +220,26 @@ public class Management {
 		}
 		return ;
 	}
+	/**
+	 * Determines which furniture category is being requested.
+	 * @param input A string array that contains the full request of the user.
+	 */
 	public void createArray(String[] input) {
 	 String table = input[1];
-	 	if(table.equals("Chair")) {
+	 	if(table.equals("Chair") || table.equals("chair") ) {
 	 		this.chairArray(input[0]);
 	 	}
-	 	else if(table.equals("Desk")) {
+	 	else if(table.equals("Desk")|| table.equals("desk")) {
 	 		this.deskArray(input[0]);
 	 	}
-	 	else if(table.equals("Filing")) {
+	 	else if(table.equals("Filing")|| table.equals("filing")) {
 	 		this.filingArray(input[0]);
 	 	}
-	 	else if(table.equals("Lamp")) {
+	 	else if(table.equals("Lamp")|| table.equals("lamp")) {
 	 		this.lampArray(input[0]);
 	 	}
 	 
  }
 	
-	public String selectAllManufacturers() {
-		StringBuilder names = new StringBuilder();
-		
-		try {
-			Statement stmt = dbConnect.createStatement();
-			results = stmt.executeQuery("SELECT Name FROM Manufacturer");
-			
-			while(results.next()) {
-				names.append(results.getString());
-				names.append("\n");
-			}
-			stmt.close();
-		}catch(SQLException e) {
-			System.out.println("Could not access the MANUFACTURER Table");
-		}
-		
-		return names.toString();
-
-	}
 	
-	public static void main(String[] args) {
-
-		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
-        myJDBC.initializeConnection();
-		String[] input1 = {"Mesh","Chair","1"};
-		myJDBC.createArray(input1);
-        System.out.println(myJDBC.chairList.get(0).toString());
-		String[] input2 = {"Traditional","Desk","1"};
-		myJDBC.createArray(input2);
-        System.out.println(myJDBC.deskList.get(0).toString());
-		String[] input3 = {"Medium","Filing","1"};
-		myJDBC.createArray(input3);
-        System.out.println(myJDBC.filingList.get(0).toString());
-		String[] input4 = {"Study","Lamp","1"};
-		myJDBC.createArray(input4);
-        System.out.println(myJDBC.lampList.get(0).toString());
-    }
 }

@@ -1,3 +1,5 @@
+package edu.ucalgary.ensf409;
+
 import java.io.*;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -19,6 +21,7 @@ public class User {
 	private static String filename = "orderform.txt";
 	
 	//Request user's input
+	
 	public static void main (String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
@@ -35,10 +38,10 @@ public class User {
 			System.out.println("Enter enter a valid type containing only alphabets");
 			type = sc.nextLine();
 		}
-		
+		int number = 0;
 		try {
 			System.out.print("Please enter the number of items you need:");
-			int number = sc.nextInt();
+			 number = sc.nextInt();
 			sc.close();
 			System.out.println("You requested "  + number + " "+ category + " " + "of type" + " "+ type);
 		}
@@ -46,7 +49,15 @@ public class User {
 			//e.printStackTrace();
 			System.err.println("Please enter a valid integer amount of items");
 		}
-		
+		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
+        myJDBC.initializeConnection();
+		String[] input1 = {type,category,Integer.toString(number)};
+		myJDBC.createArray(input1);
+		myJDBC.toArray();
+		ArrayList<Furniture> list2 = FurnitureBuilder.calculateLowestPrice(myJDBC.list3);
+		for(int i =0; i<list2.size();i++) {
+			System.out.println(list2.get(i).toString());
+		}
 		orderForm();
 		
 		//call method to determine if the request can be filled
