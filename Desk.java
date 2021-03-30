@@ -4,7 +4,7 @@ package edu.ucalgary.ensf409;
  * @author Adeshpal Virk
  * @since March 27, 2021
  * @version 1.0
- * {@summary} Furniture subclass for object Chair.
+ * {@summary} Furniture subclass for object Desk.
  *
  */
 public class Desk extends Furniture {
@@ -29,13 +29,13 @@ public class Desk extends Furniture {
     }
 	/**
 	 * Desk constructor.
-	 * @param id Chair id
-	 * @param type Chair type
-	 * @param legs Chair legs availability
-	 * @param top Chair top availability
-	 * @param drawer Chair drawer availability
-	 * @param price Chair price
-	 * @param manuId Chair's manufacturer ID.
+	 * @param id Desk id
+	 * @param type Desk type
+	 * @param legs Desk legs availability
+	 * @param top Desk top availability
+	 * @param drawer Desk drawers availability
+	 * @param price Desk price
+	 * @param manuId Desk's manufacturer ID.
 	 */
     public Desk(String id, String type, String legs, String top, String drawer, int price, String manuId) {
         super(id, type, new String[]{legs, top, drawer}, price, manuId);

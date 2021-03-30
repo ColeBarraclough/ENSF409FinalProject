@@ -127,7 +127,7 @@ public class Management {
 			
 			myStmt.close();
 		}catch(SQLException ex){
-			System.out.println("Could not get the names from table studio.");
+			System.out.println("Could not get the names from table chair.");
 		}
 		return ;
 	}
@@ -157,7 +157,7 @@ public class Management {
 			
 			myStmt.close();
 		}catch(SQLException ex){
-			System.out.println("Could not get the names from table studio.");
+			System.out.println("Could not get the names from table desk.");
 		}
 		return ;
 	}
@@ -186,7 +186,7 @@ public class Management {
 			
 			myStmt.close();
 		}catch(SQLException ex){
-			System.out.println("Could not get the names from table studio.");
+			System.out.println("Could not get the names from table filing.");
 		}
 		return ;
 	}
@@ -216,7 +216,7 @@ public class Management {
 			
 			myStmt.close();
 		}catch(SQLException ex){
-			System.out.println("Could not get the names from table studio.");
+			System.out.println("Could not get the names from table lamp.");
 		}
 		return ;
 	}

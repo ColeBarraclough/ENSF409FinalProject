@@ -55,9 +55,10 @@ public class Furniture {
         return type;
     }
     public String getManuId() {
-        return type;
+        return manuId;
     }
 
+	//Update this to print the right furniture name (Chair, Desk, Filing, or Lamp)
     public String toString() {
         return "Chair = "  + id + ", " + type + ", " + Arrays.toString(parts) + ", " + price+ ", " + manuId;
     }
@@ -71,3 +72,4 @@ public class Furniture {
     	}
     }
 }
+

@@ -4,7 +4,7 @@ package edu.ucalgary.ensf409;
  * @author Adeshpal Virk
  * @since March 27, 2021
  * @version 1.0
- * {@summary} Furniture subclass for object Chair.
+ * {@summary} Furniture subclass for object Filing.
  *
  */
 public class Filing extends Furniture {
@@ -13,9 +13,9 @@ public class Filing extends Furniture {
 	 */
     private boolean rails;
 	/**
-	 * drawer availability 
+	 * drawers availability 
 	 */
-    private boolean drawer;
+    private boolean drawers;
 	/**
 	 * cabinet availability 
 	 */
@@ -29,18 +29,18 @@ public class Filing extends Furniture {
     }
 	/**
 	 * Filing constructor.
-	 * @param id Chair id
-	 * @param type Chair type
-	 * @param rails Chair rails availability
-	 * @param drawer Chair drawer availability
-	 * @param cabinet Chair cabinet availability
-	 * @param price Chair price
-	 * @param manuId Chair's manufacturer ID.
+	 * @param id Filing id
+	 * @param type Filing type
+	 * @param rails Filing rails availability
+	 * @param drawer Filing drawer availability
+	 * @param cabinet Filing cabinet availability
+	 * @param price Filing price
+	 * @param manuId Filing's manufacturer ID.
 	 */
-    public Filing(String id, String type, String rails, String drawer, String cabinet, int price, String manuId) {
-        super(id, type, new String[]{rails, drawer, cabinet}, price, manuId);
+    public Filing(String id, String type, String rails, String drawers, String cabinet, int price, String manuId) {
+        super(id, type, new String[]{rails, drawers, cabinet}, price, manuId);
         this.rails = super.torF(rails);
-        this.drawer = super.torF(drawer);
+        this.drawers = super.torF(drawers);
         this.cabinet = super.torF(cabinet);
     }
 	/**
@@ -56,9 +56,9 @@ public class Filing extends Furniture {
         return cabinet;
     }
 	/**
-	 * @return Drawer availability.
+	 * @return Drawers availability.
 	 */
-    public boolean getDrawer() {
-        return drawer;
+    public boolean getDrawers() {
+        return drawers;
     }
 }
