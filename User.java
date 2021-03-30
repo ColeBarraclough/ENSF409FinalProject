@@ -26,18 +26,21 @@ public class User {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Please enter a furniture category:");
-		String category = sc.nextLine();
-		while (isAlpha(category) == false) {
+		String val1 = sc.nextLine();
+		while (isAlpha(val1) == false) {
 			System.out.println("Enter enter a valid category containing only alphabets");
-			category = sc.nextLine();
+			val1 = sc.nextLine();
 		}
+		String category = formatString(val1);
 		
 		System.out.print("Please enter a furniture type:");
-		String type = sc.nextLine();
-		while (isAlpha(type) == false) {
+		String val2 = sc.nextLine();
+		while (isAlpha(val2) == false) {
 			System.out.println("Enter enter a valid type containing only alphabets");
-			type = sc.nextLine();
+			val2 = sc.nextLine();
 		}
+		String type = formatString(val2);
+		
 		int number = 0;
 		try {
 			System.out.print("Please enter the number of items you need:");
@@ -50,7 +53,7 @@ public class User {
 			System.err.println("Please enter a valid integer amount of items");
 		}
 		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
-        myJDBC.initializeConnection();
+                myJDBC.initializeConnection();
 		String[] input1 = {type,category,Integer.toString(number)};
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
@@ -72,12 +75,30 @@ public class User {
 	   char [] arr = str.toCharArray();
 	   
 	   for (int i = 0; i < arr.length; i++) {
-		   if (!( (arr[i] >= 'a' && arr[i] <='z') || (arr[i] >= 'A' && arr[i] <= 'Z') ) ) {
+		   if ( !(arr[i] >= 'a'  && arr[i] <='z') || (arr[i] >= 'A' && arr[i] <= 'Z') || arr[i] == ' ' ) {
 			   return false;
 		   }
 	   }
 	   return true;
 		
+	}
+	
+		//Cleans up the String to make it acceptable to the database
+	public static String formatString(String arg) {
+		String str = arg.trim();
+		String result ="";
+		String[] arr = str.split("\\s");
+		
+		int i=0;
+		
+		while(i<arr.length){
+			String test = arr[i];
+			result += test.substring(0,1).toUpperCase();
+			result += test.substring(1).toLowerCase();
+			result+=" ";
+			i++;
+		}
+		return result;
 	}
 	
 	public static void orderForm() {
@@ -144,6 +165,7 @@ public class User {
 	public void manufacturers() {
 		//This method should access the class/method that
 		// connects to the database
+		System.out.println(selectAllManufacturers());
 	}
 
 }
