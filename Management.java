@@ -241,5 +241,34 @@ public class Management {
 	 
  }
 	
+	//If request cannot be filled, this method outputs a recommended manufacturer
+	//based on the requested item's ID
+	
+	public String selectAllManufacturers(String ManuID) { 
+
+	 StringBuilder names = new StringBuilder();
+
+	 try { 
+		Statement stmt = dbConnect.createStatement(); 
+		results =	  stmt.executeQuery("SELECT * FROM Manufacturer where ManuID =" + '"'+ ManuID + '"');
+
+		while(results.next()) {
+			names.append("Name: " + results.getString("Name") + "\n");
+			names.append("Phone: " + results.getString("Phone") + "\n");
+			names.append("Province: " + results.getString("Province"));
+			names.append("\n"); 
+		} 
+		stmt.close(); 
+		}
+	catch(SQLException e) {
+		System.out.println("Could not access the MANUFACTURER Table");
+	}
+
+	return names.toString();
+
+	}
+		  
+	
+	
 	
 }
