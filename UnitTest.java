@@ -300,9 +300,9 @@ public class UnitTest {
 		String[] request = {"Mesh", "Chair"};
 		database.createArray(request);
         database.toArray();
-		String[] idList = new String[database.list3.length];
-		for(int i = 0; i < database.list3.length; i++){
-			idList[i] = database.list3[i].getId();
+		String[] idList = new String[database.listOfFurnitures.length];
+		for(int i = 0; i < database.listOfFurnitures.length; i++){
+			idList[i] = database.listOfFurnitures[i].getId();
 		}
 		String[] check = {"C0942", "C6748", "C8138", "C9890"};
 		assertTrue("An incorrect list of chairs was created", Arrays.equals(idList, check));
@@ -318,7 +318,7 @@ public class UnitTest {
 		database.createArray(request);
         database.toArray();
 		FurnitureBuilder mb = new FurnitureBuilder();
-		mb.buildFurniture(database.list3, 1);
+		mb.buildFurniture(database.listOfFurnitures, 1);
 		ArrayList<ArrayList<Furniture>> test = mb.getBuildList();
 		String[][] idList = new String[test.size()][];
 		for(int i = 0; i < test.size(); i++){
@@ -341,7 +341,7 @@ public class UnitTest {
 		database.createArray(request);
         database.toArray();
 		FurnitureBuilder mb = new FurnitureBuilder();
-		assertFalse("Failed to detect that the build was impossible", mb.buildFurniture(database.list3, 1));
+		assertFalse("Failed to detect that the build was impossible", mb.buildFurniture(database.listOfFurnitures, 1));
 	}
 	
 	@Test
@@ -353,9 +353,9 @@ public class UnitTest {
 		String[] request = {"Traditional", "Desk"};
 		database.createArray(request);
         database.toArray();
-		String[] idList = new String[database.list3.length];
-		for(int i = 0; i < database.list3.length; i++){
-			idList[i] = database.list3[i].getId();
+		String[] idList = new String[database.listOfFurnitures.length];
+		for(int i = 0; i < database.listOfFurnitures.length; i++){
+			idList[i] = database.listOfFurnitures[i].getId();
 		}
 		String[] check = {"D0890", "D4231", "D8675", "D9352"};
 		assertTrue("An incorrect list of desks was created", Arrays.equals(idList, check));
@@ -371,7 +371,7 @@ public class UnitTest {
 		database.createArray(request);
         database.toArray();
 		FurnitureBuilder mb = new FurnitureBuilder();
-		mb.buildFurniture(database.list3, 2);
+		mb.buildFurniture(database.listOfFurnitures, 2);
 		ArrayList<ArrayList<Furniture>> test = mb.getBuildList();
 		String[][] idList = new String[test.size()][];
 		for(int i = 0; i < test.size(); i++){
@@ -393,9 +393,9 @@ public class UnitTest {
 		String[] request = {"Small", "Filing"};
 		database.createArray(request);
         database.toArray();
-		String[] idList = new String[database.list3.length];
-		for(int i = 0; i < database.list3.length; i++){
-			idList[i] = database.list3[i].getId();
+		String[] idList = new String[database.listOfFurnitures.length];
+		for(int i = 0; i < database.listOfFurnitures.length; i++){
+			idList[i] = database.listOfFurnitures[i].getId();
 		}
 		String[] check = {"F001", "F004", "F005", "F006", "F013"};
 		assertTrue("An incorrect list of filings was created", Arrays.equals(idList, check));
@@ -411,7 +411,7 @@ public class UnitTest {
 		database.createArray(request);
         database.toArray();
 		FurnitureBuilder mb = new FurnitureBuilder();
-		mb.buildFurniture(database.list3, 2);
+		mb.buildFurniture(database.listOfFurnitures, 2);
 		ArrayList<ArrayList<Furniture>> test = mb.getBuildList();
 		String[][] idList = new String[test.size()][];
 		for(int i = 0; i < test.size(); i++){
@@ -433,9 +433,9 @@ public class UnitTest {
 		String[] request = {"Study", "Lamp"};
 		database.createArray(request);
         database.toArray();
-		String[] idList = new String[database.list3.length];
-		for(int i = 0; i < database.list3.length; i++){
-			idList[i] = database.list3[i].getId();
+		String[] idList = new String[database.listOfFurnitures.length];
+		for(int i = 0; i < database.listOfFurnitures.length; i++){
+			idList[i] = database.listOfFurnitures[i].getId();
 		}
 		String[] check = {"L223", "L928", "L980", "L982"};
 		assertTrue("An incorrect list of lamps was created", Arrays.equals(idList, check));
@@ -451,7 +451,7 @@ public class UnitTest {
 		database.createArray(request);
         database.toArray();
 		FurnitureBuilder mb = new FurnitureBuilder();
-		mb.buildFurniture(database.list3, 3);
+		mb.buildFurniture(database.listOfFurnitures, 3);
 		ArrayList<ArrayList<Furniture>> test = mb.getBuildList();
 		String[][] idList = new String[test.size()][];
 		for(int i = 0; i < test.size(); i++){
