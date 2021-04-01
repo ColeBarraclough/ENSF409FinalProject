@@ -196,7 +196,6 @@ public class Management {
 	 * @param type Determines which type of lamp is requested.
 	 */
 	public void lampArray(String type) {
-		System.out.println(type);
 		try {               
 			Statement myStmt = dbConnect.createStatement();
 			String query = "SELECT * FROM lamp";
