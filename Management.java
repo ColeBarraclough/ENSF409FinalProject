@@ -46,14 +46,18 @@ public class Management {
     /**
      * Array of Furniture objects.
      */
-    Furniture[] list3;
+    Furniture[] listOfFurnitures;
     /**
      * Converts ArrayList to Array.
      */
+    public Furniture[] getListOfFurniture() {
+    	return listOfFurnitures;
+    }
     public void toArray() {
-    	list3 = new Furniture[list.size()];
+    	System.out.println(list);
+    	listOfFurnitures = new Furniture[list.size()];
     	for(int i=0; i< list.size();i++) {
-    		list3[i] = list.get(i);
+    		listOfFurnitures[i] = list.get(i);
     	}
     }
 
@@ -225,16 +229,16 @@ public class Management {
 	 */
 	public void createArray(String[] input) {
 	 String table = input[1];
-	 	if(table.equals("Chair") || table.equals("chair") ) {
+	 	if(table.equals("Chair")) {
 	 		this.chairArray(input[0]);
 	 	}
-	 	else if(table.equals("Desk")|| table.equals("desk")) {
+	 	else if(table.equals("Desk")) {
 	 		this.deskArray(input[0]);
 	 	}
-	 	else if(table.equals("Filing")|| table.equals("filing")) {
+	 	else if(table.equals("Filing")) {
 	 		this.filingArray(input[0]);
 	 	}
-	 	else if(table.equals("Lamp")|| table.equals("lamp")) {
+	 	else if(table.equals("Lamp")) {
 	 		this.lampArray(input[0]);
 	 	}
 	 
