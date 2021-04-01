@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 
 public class User {
-	private static String filename = "orderform.txt";
+	private static String filename = "orderform1.txt";
 	
 	//Request user's input
 	
@@ -54,14 +54,17 @@ public class User {
 		}
 		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
                 myJDBC.initializeConnection();
-		String[] input1 = {type,category,Integer.toString(number)};
+		String[] input1 = {type.trim(),category.trim(),Integer.toString(number)};
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
-		ArrayList<Furniture> list2 = FurnitureBuilder.calculateLowestPrice(myJDBC.list3);
-		for(int i =0; i<list2.size();i++) {
-			System.out.println(list2.get(i).toString());
+		FurnitureBuilder builder = new FurnitureBuilder();
+		if(!builder.buildFurniture(myJDBC.listOfFurnitures,number)) {  
+			manufacturers(myJDBC.getListOfFurniture());
 		}
-		orderForm();
+		else {
+			orderForm(type.trim(),category.trim(),Integer.toString(number),builder);
+		}
+		
 		
 		//call method to determine if the request can be filled
 		//fillRequest()
@@ -69,7 +72,6 @@ public class User {
 			// if false, calls manufacturers
 			
 	}
-	
 	//Checks that the input string argument is strictly letters - no numbers, or other wierd characters
 	public static boolean isAlpha(String str) {
 	   char [] arr = str.toCharArray();
@@ -101,7 +103,7 @@ public class User {
 		return result;
 	}
 	
-	public static void orderForm() {
+	public static void orderForm(String type,String category,String number,FurnitureBuilder builder) {
 		File form = new File(filename);
 		BufferedWriter writer = null;
 		
@@ -112,22 +114,25 @@ public class User {
 		}
 		
 		try {	//Create the file if it doesnt exist
-			
-			if (!form.exists()) {
-				form.createNewFile();
-				System.out.println("The new order form file has been created");
+			int i=1;
+			while(form.exists()) {
+				String yes = "orderform";
+				yes += Integer.toString(i);
+				yes += ".txt";
+				filename = yes;
+				i++;
+				form = new File(filename);
 			}
-			else {
-				System.out.println("File already exists");
-			}
+			form.createNewFile();
+			System.out.println("The new order form file has been created");
 		}
 		catch (IOException e) {
 		      System.out.println("An error occurred in creating the file.");
 		      e.printStackTrace();
 		}
-		String faculty = "Arts";
-		String contact = "Emily Ann";
-		String date = "Jan 1, 1920";
+		String faculty = "";
+		String contact = "";
+		String date = "";
 		
 		//Now write the order to the file
 		try {
@@ -135,11 +140,16 @@ public class User {
 			writer.write("Furniture Order Form " + "\n\n" + "Faculty Name: " + faculty + "\n");
 			writer.write("Contact: " + contact +"\n" + "Date: " + date + "\n\n");
 			
-			writer.write("Original Request: " + "\n\n");
+			writer.write("Original Request: ");
+			writer.write(type.toLowerCase() +" "+ category.toLowerCase() + ", " + number+ "\n\n");
 			
 			writer.write("Items Ordered" + "\n");
-			writer.write("ID: " + "\n" + "ID: " + "\n\n");
-			writer.write("Total Price: ");
+			String[] ID = builder.getIds();
+			for(int i =0; i< ID.length ;i++) {
+				writer.write("ID: " + ID[i] + "\n");
+			}
+
+			writer.write("\n" +"Total Price: " + Integer.toString(builder.getPrice()));
 		}
 		catch (Exception e) {
 		      System.err.println("I/O error opening/writing file.");
@@ -159,13 +169,28 @@ public class User {
 			}
 			
 		}
+		
+		
 	}
 	
 	//Prints out the names of possible manufacturers
-	public void manufacturers() {
+	public static void manufacturers(Furniture[] array) {
+		System.out.println(array.length);
 		//This method should access the class/method that
 		// connects to the database
-		System.out.println(selectAllManufacturers());
+		ArrayList<String> manuIDs = new ArrayList<>();
+		manuIDs.add(array[0].getManuId());
+		for(int i = 1;i<array.length;i++) {
+			for(int j=0; j< manuIDs.size();j++) {
+				if(manuIDs.contains(array[i].getManuId())) {
+					
+				}
+				else {
+					manuIDs.add(array[i].getManuId());
+				}
+			}
+		}
+		System.out.println(manuIDs);
 	}
 
 }

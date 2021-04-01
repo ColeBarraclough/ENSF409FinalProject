@@ -36,7 +36,20 @@ public class FurnitureBuilder {
             return true;
         }
     }
-
+    /**
+     * Returns the array of all of the ids in the buildList
+     * @return the ids of all of the components in the buildList
+     */
+    public String[] getIds() {
+        ArrayList<String> myList = new ArrayList<String>();
+        for (int i = 0; i < buildList.size(); i++) {
+            for (int j = 0; j < buildList.get(i).size(); j++) {
+                myList.add(buildList.get(i).get(j).getId());
+            }
+        }
+        String[] arr = new String[myList.size()];
+        return myList.toArray(arr);
+    }
     /**
      * Returns the price of all of the components in the buildList
      * @return the price of all of the components in the buildList
