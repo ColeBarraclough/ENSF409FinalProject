@@ -52,16 +52,28 @@ public class User {
 			//e.printStackTrace();
 			System.err.println("Please enter a valid integer amount of items");
 		}
-		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
+		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","Tyler","ensfTG#5480");
                 myJDBC.initializeConnection();
 		String[] input1 = {type.trim(),category.trim(),Integer.toString(number)};
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
 		FurnitureBuilder builder = new FurnitureBuilder();
 		if(!builder.buildFurniture(myJDBC.listOfFurnitures,number)) {  
-			manufacturers(myJDBC.getListOfFurniture());
+			ArrayList<String> manuIDs = manufacturers(myJDBC.getListOfFurniture());
+			System.out.println("Order cannot be fulfilled based on current inventory.");
+			System.out.println("Suggested manufacturers are:");
+			for(int i = 0; i < manuIDs.size(); i++){
+				System.out.println(myJDBC.selectAllManufacturers(manuIDs.get(i)));
+			}
 		}
 		else {
+			System.out.println("Order is possible if you buy all on the following list for $" + Integer.toString(builder.getPrice())".");
+			ArrayList<ArrayList<Furniture>> idList = builder.getBuildList();
+			for(int i = 0; i < idList.size(); i++){
+				for(int j = 0; j < idList.get(i).size(); j++){
+					 System.out.println(idList.get(i).get(j).getId());
+				}
+			}
 			orderForm(type.trim(),category.trim(),Integer.toString(number),builder);
 		}
 		
@@ -174,8 +186,7 @@ public class User {
 	}
 	
 	//Prints out the names of possible manufacturers
-	public static void manufacturers(Furniture[] array) {
-		System.out.println(array.length);
+	public static ArrayList<String> manufacturers(Furniture[] array) {
 		//This method should access the class/method that
 		// connects to the database
 		ArrayList<String> manuIDs = new ArrayList<>();
@@ -190,7 +201,7 @@ public class User {
 				}
 			}
 		}
-		System.out.println(manuIDs);
+		return manuIDs;
 	}
 
 }
