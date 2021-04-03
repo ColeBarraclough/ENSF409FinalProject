@@ -52,29 +52,18 @@ public class User {
 			//e.printStackTrace();
 			System.err.println("Please enter a valid integer amount of items");
 		}
-		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","Tyler","ensfTG#5480");
+		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
                 myJDBC.initializeConnection();
 		String[] input1 = {type.trim(),category.trim(),Integer.toString(number)};
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
 		FurnitureBuilder builder = new FurnitureBuilder();
 		if(!builder.buildFurniture(myJDBC.listOfFurnitures,number)) {  
-			ArrayList<String> manuIDs = manufacturers(myJDBC.getListOfFurniture());
-			System.out.println("Order cannot be fulfilled based on current inventory.");
-			System.out.println("Suggested manufacturers are:");
-			for(int i = 0; i < manuIDs.size(); i++){
-				System.out.println(myJDBC.selectAllManufacturers(manuIDs.get(i)));
-			}
+			manufacturers(myJDBC.getListOfFurniture());
 		}
 		else {
-			System.out.println("Order is possible if you buy all on the following list for $" + Integer.toString(builder.getPrice())".");
-			ArrayList<ArrayList<Furniture>> idList = builder.getBuildList();
-			for(int i = 0; i < idList.size(); i++){
-				for(int j = 0; j < idList.get(i).size(); j++){
-					 System.out.println(idList.get(i).get(j).getId());
-				}
-			}
 			orderForm(type.trim(),category.trim(),Integer.toString(number),builder);
+			myJDBC.updateDatabase(category.trim(),builder);
 		}
 		
 		
@@ -84,12 +73,12 @@ public class User {
 			// if false, calls manufacturers
 			
 	}
-	//Checks that the input string argument is strictly letters - no numbers, or other wierd characters
+	//Checks that the input string argument is strictly letters - no numbers, or other weird characters
 	public static boolean isAlpha(String str) {
 	   char [] arr = str.toCharArray();
 	   
 	   for (int i = 0; i < arr.length; i++) {
-		   if ( !(arr[i] >= 'a'  && arr[i] <='z') || (arr[i] >= 'A' && arr[i] <= 'Z') || arr[i] == ' ' ) {
+		   if ( !((arr[i] >= 'a'  && arr[i] <='z') || (arr[i] >= 'A' && arr[i] <= 'Z') || (arr[i] == ' ' ))) {
 			   return false;
 		   }
 	   }
@@ -186,7 +175,7 @@ public class User {
 	}
 	
 	//Prints out the names of possible manufacturers
-	public static ArrayList<String> manufacturers(Furniture[] array) {
+	public static void manufacturers(Furniture[] array) {
 		//This method should access the class/method that
 		// connects to the database
 		ArrayList<String> manuIDs = new ArrayList<>();
@@ -201,7 +190,7 @@ public class User {
 				}
 			}
 		}
-		return manuIDs;
+		System.out.println("manufactures: " + manuIDs);
 	}
 
 }

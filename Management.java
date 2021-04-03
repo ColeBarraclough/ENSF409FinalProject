@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.management.Query;
+
 /**
  * 
  * @author Adeshpal Virk
@@ -54,7 +56,6 @@ public class Management {
     	return listOfFurnitures;
     }
     public void toArray() {
-    	System.out.println(list);
     	listOfFurnitures = new Furniture[list.size()];
     	for(int i=0; i< list.size();i++) {
     		listOfFurnitures[i] = list.get(i);
@@ -270,8 +271,41 @@ public class Management {
 	return names.toString();
 
 	}
-		  
 	
-	
+	public void updateDatabase(String category, FurnitureBuilder builder) {
+		String[] IDs = builder.getIds();
+		for(int i =0 ; i< IDs.length;i++) {
+	        try {
+	            String query = "UPDATE "+category.toLowerCase()+" SET "+this.getSetStatement(category)+" Where ID = ?;";
+	            
+	            PreparedStatement myStmt = dbConnect.prepareStatement(query);
+
+	            myStmt.setString(1, IDs[i]);
+	            System.out.print(query);
+	            myStmt.executeUpdate();
+	            myStmt.close();
+
+	        } catch (SQLException ex) {
+				System.out.println("Could not update"+category+".");
+	        }
+		}
+		
+    }
+	public String getSetStatement(String category) {
+		String setStatement = "";
+	 	if(category.equals("Chair")) {
+	 		 setStatement = "Legs = 'N', Arms = 'N', Seat = 'N', Cushion = 'N'";
+	 	}
+	 	else if(category.equals("Desk")) {
+	 		 setStatement = "Legs = 'N', Top = 'N', Drawer = 'N'";
+	 	}
+	 	else if(category.equals("Filing")) {
+	 		 setStatement = "Rails = 'N', Drawers = 'N', Cabinet = 'N'";
+	 	}
+	 	else {
+	 		 setStatement = "Base = 'N', Bulb = 'N'";
+	 	}
+	 	return setStatement;
+	}
 	
 }
