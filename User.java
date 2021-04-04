@@ -58,8 +58,8 @@ public class User {
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
 		FurnitureBuilder builder = new FurnitureBuilder();
-		if(!builder.buildFurniture(myJDBC.listOfFurnitures,number)) {  
-			manufacturers(myJDBC.getListOfFurniture());
+		if(!builder.buildFurniture(myJDBC.listOfFurnitures,number)) {
+			System.out.println("Order cannot be fulfilled based on current inventory. Suggested manufacturers are " +myJDBC.manuIDstoNames(manufacturers(myJDBC.getListOfFurniture()))+".");
 		}
 		else {
 			orderForm(type.trim(),category.trim(),Integer.toString(number),builder);
@@ -125,7 +125,7 @@ public class User {
 				form = new File(filename);
 			}
 			form.createNewFile();
-			System.out.println("The new order form file has been created");
+			
 		}
 		catch (IOException e) {
 		      System.out.println("An error occurred in creating the file.");
@@ -146,11 +146,23 @@ public class User {
 			
 			writer.write("Items Ordered" + "\n");
 			String[] ID = builder.getIds();
+			System.out.print("Purchase ");
 			for(int i =0; i< ID.length ;i++) {
 				writer.write("ID: " + ID[i] + "\n");
-			}
+				if(i == (ID.length-1)) {
+					System.out.print(" and ");
+				}
+				System.out.print(ID[i]);
+				if(!(i >= (ID.length-2))) {
+					System.out.print(", ");
 
-			writer.write("\n" +"Total Price: " + Integer.toString(builder.getPrice()));
+				}
+			}
+			String price = Integer.toString(builder.getPrice());
+			System.out.print(" for "+price);
+
+
+			writer.write("\n" +"Total Price: " + price+".");
 		}
 		catch (Exception e) {
 		      System.err.println("I/O error opening/writing file.");
@@ -175,7 +187,7 @@ public class User {
 	}
 	
 	//Prints out the names of possible manufacturers
-	public static void manufacturers(Furniture[] array) {
+	public static ArrayList<String> manufacturers(Furniture[] array) {
 		//This method should access the class/method that
 		// connects to the database
 		ArrayList<String> manuIDs = new ArrayList<>();
@@ -190,7 +202,7 @@ public class User {
 				}
 			}
 		}
-		System.out.println("manufactures: " + manuIDs);
+		return manuIDs;
 	}
 
 }

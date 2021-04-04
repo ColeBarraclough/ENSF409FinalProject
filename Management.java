@@ -245,33 +245,40 @@ public class Management {
 	 
  }
 	
-	//If request cannot be filled, this method outputs a recommended manufacturer
-	//based on the requested item's ID
-	
-	public String selectAllManufacturers(String ManuID) { 
 
-	 StringBuilder names = new StringBuilder();
+	/**
+	 * If request cannot be filled, this method takes in the manufacturer IDs for the specified product
+	 * and returns a String that contains the names of recommended manufacturers.
+	 * @param manuIDs manufacturer IDs.
+	 * @return String with names of recommended manufacturers.
+	 */
+	public String manuIDstoNames(ArrayList<String> manuIDs) {
+		String names = "";
+		for(int i =0 ; i< manuIDs.size();i++) {
+	        try {
+	        	Statement myStmt = dbConnect.createStatement();
+	            String query = "SELECT * FROM manufacturer Where ManuID = "+manuIDs.get(i)+";";
+	            results = myStmt.executeQuery(query);
+	            while (results.next()){
+	                names += results.getString("Name");
+	                if(!(i == (manuIDs.size() - 1))) {
+	                	 names += ", ";
+	                }
+				}
+	            
+	            myStmt.close();
 
-	 try { 
-		Statement stmt = dbConnect.createStatement(); 
-		results =	  stmt.executeQuery("SELECT * FROM Manufacturer where ManuID =" + '"'+ ManuID + '"');
-
-		while(results.next()) {
-			names.append("Name: " + results.getString("Name") + "\n");
-			names.append("Phone: " + results.getString("Phone") + "\n");
-			names.append("Province: " + results.getString("Province"));
-			names.append("\n"); 
-		} 
-		stmt.close(); 
+	        } catch (SQLException ex) {
+				System.out.println("Could not get names.");
+	        }
 		}
-	catch(SQLException e) {
-		System.out.println("Could not access the MANUFACTURER Table");
+		return names;
 	}
-
-	return names.toString();
-
-	}
-	
+/**
+ * If the requested order is possible this updates the database.
+ * @param category the category to which the item belongs.
+ * @param builder A FurnitureBuilder Object.
+ */
 	public void updateDatabase(String category, FurnitureBuilder builder) {
 		String[] IDs = builder.getIds();
 		for(int i =0 ; i< IDs.length;i++) {
@@ -281,7 +288,6 @@ public class Management {
 	            PreparedStatement myStmt = dbConnect.prepareStatement(query);
 
 	            myStmt.setString(1, IDs[i]);
-	            System.out.print(query);
 	            myStmt.executeUpdate();
 	            myStmt.close();
 
@@ -291,6 +297,11 @@ public class Management {
 		}
 		
     }
+	/**
+	 * Creates a statement that corresponds to setting each part within a category to false.
+	 * @param category the category to which the item belongs.
+	 * @return A String that contains the command needed to sets part availability to false.
+	 */
 	public String getSetStatement(String category) {
 		String setStatement = "";
 	 	if(category.equals("Chair")) {
