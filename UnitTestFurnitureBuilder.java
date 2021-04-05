@@ -4,13 +4,26 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import java.io.*;
 import java.util.*;
-//import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+
+/**
+ * 
+ * @author Tyler Galea
+ * @since April 5, 2021
+ * @version 1.1
+ * {@summary} Unit tests for the functionality of FurintureBuilde.java.
+ *
+ */
 
 public class UnitTestFurnitureBuilder {
 
 	@Test
 	
-	//Test FurnitureBuilder.java for one set of chairs
+	/**
+	 * Creates a ArrayList of Chair objects and test if
+	 * FurnitureBuilder.java can return the cheapest combination
+	 * of chairs that can successfully create 1 chair of
+	 * the specified type
+	 */
 	
 	public void testFurnitureBuilderChair1() {
         
@@ -39,7 +52,12 @@ public class UnitTestFurnitureBuilder {
 	
 	@Test
 	
-	//Test FurnitureBuilder.java for one set of chairs
+	/**
+	 * Creates a ArrayList of Chair objects and test if
+	 * FurnitureBuilder.java list can return the cheapest combination
+	 * of chairs that can successfully create 2 chairs of
+	 * the specified type
+	 */
 	
 	public void testFurnitureBuilderChair2() {
         
@@ -68,7 +86,11 @@ public class UnitTestFurnitureBuilder {
 	
 	@Test
 	
-	//Test FurnitureBuilder.java for three sets of chairs
+	/**
+	 * Creates a ArrayList of Chair objects and test if
+	 * FurnitureBuilder.java can detect that it is impossible
+	 * to create 3 chairs of the specified type
+	 */
 	
 	public void testFurnitureBuilderChair3() {
         
@@ -87,7 +109,12 @@ public class UnitTestFurnitureBuilder {
 	
 	@Test
 	
-	//Test FurnitureBuilder.java for one set of desks
+	/**
+	 * Creates a ArrayList of Desk objects and test if
+	 * FurnitureBuilder.java can return the cheapest combination
+	 * of desks that can successfully create 1 desk of
+	 * the specified type
+	 */
 	
 	public void testFurnitureBuilderDesk1() {
         
@@ -116,7 +143,12 @@ public class UnitTestFurnitureBuilder {
 	
 	@Test
 	
-	//Test FurnitureBuilder.java for one set of filings
+	/**
+	 * Creates a ArrayList of Filing objects and test if
+	 * FurnitureBuilder.java can return the cheapest combination
+	 * of filings that can successfully create 1 filing of
+	 * the specified type
+	 */
 	
 	public void testFurnitureBuilderFiling1() {
         
@@ -145,7 +177,12 @@ public class UnitTestFurnitureBuilder {
 	
 	@Test
 	
-	//Test FurnitureBuilder.java for one set of lamps
+	/**
+	 * Creates a ArrayList of Lamp objects and test if
+	 * FurnitureBuilder.java can return the cheapest combination
+	 * of lamps that can successfully create 1 lamp of
+	 * the specified type
+	 */
 	
 	public void testFurnitureBuilderLamp1() {
         

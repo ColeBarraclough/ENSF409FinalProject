@@ -4,17 +4,31 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import java.io.*;
 import java.util.*;
-//import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+
+/**
+ * 
+ * @author Tyler Galea
+ * @since April 5, 2021
+ * @version 1.1
+ * {@summary} Unit tests for the functionality of Management.java.
+ *
+ */
 
 public class UnitTestManagement {
 
-	//Enter Username and Password here to test database
+	/**
+	 * The database url, username and password
+	 */
 	private Management database = new Management("jdbc:mysql://localhost/inventory","root","ensf409");
 
 
 	@Test
 	
-	//Test Management.java for Mesh Chair
+	/**
+	 * Make a request for a list of Chairs of type Mesh
+	 * from the database and tests if Management.java
+	 * can return the correct list of Chairs
+	 */
 	
 	public void testDatabaseChair() {
         database.initializeConnection();
@@ -31,7 +45,11 @@ public class UnitTestManagement {
 	
 	@Test
 	
-	//Test Management.java for Traditional Desk
+	/**
+	 * Make a request for a list of Desks of type Traditional
+	 * from the database and tests if Management.java
+	 * can return the correct list of Desks
+	 */
 	
 	public void testDatabaseDesk() {
         database.initializeConnection();
@@ -48,7 +66,11 @@ public class UnitTestManagement {
 	
 	@Test
 	
-	//Test Management.java for Small Filing
+	/**
+	 * Make a request for a list of Filings of type Small
+	 * from the database and tests if Management.java
+	 * can return the correct list of Filings
+	 */
 	
 	public void testDatabaseFiling() {
         database.initializeConnection();
@@ -65,7 +87,11 @@ public class UnitTestManagement {
 	
 	@Test
 	
-	//Test Management.java for Study Lamp
+	/**
+	 * Make a request for a list of Lamps of type Study
+	 * from the database and tests if Management.java
+	 * can return the correct list of Lamps
+	 */
 	
 	public void testDatabaseLamp() {
         database.initializeConnection();
@@ -81,6 +107,12 @@ public class UnitTestManagement {
 	}
 
 	@Test
+	
+	/**
+	 * Builds a Chair from FurnitureBuilder and tests
+	 * if Management.java successfully removes the
+	 * the purchased chairs form the database
+	 */
 
 	public void updateDatabaseTest() {
 		database.initializeConnection();

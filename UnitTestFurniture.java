@@ -4,16 +4,25 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import java.io.*;
 import java.util.*;
-//import org.junit.contrib.java.lang.system.ExpectedSystemExit;
+
+/**
+ * 
+ * @author Tyler Galea
+ * @since April 5, 2021
+ * @version 1.1
+ * {@summary} Unit tests for the object Furinture.
+ *
+ */
 
 public class UnitTestFurniture {
 	
-	//Enter Username and Password here to test database
-	private Management database = new Management("jdbc:mysql://localhost/inventory","Tyler","ensf409");
-	
 	@Test
 	
-	//Test getters in Chair.java
+	/**
+	 * Creates a Chair object and test if the
+	 * getter methods in Chair.java can returne
+	 * the correct information on the parts
+	 */
 	
 	public void testChairParts() {
 		Chair testChair = new Chair("C2453", "Mesh", "Y", "N", "Y", "N", 75, "004");
@@ -28,7 +37,12 @@ public class UnitTestFurniture {
 	
 	@Test
 	
-	//Test getters in Furinture.java with Chair
+	/**
+	 * Creates a Chair object and test if the
+	 * getter methods in Furinture.java can returne
+	 * the correct information on the ID, type,
+	 * price and manufacture ID
+	 */
 	
 	public void testChairIdTypePriceManuId() {
 		Chair testChair = new Chair("C2453", "Mesh", "Y", "N", "Y", "N", 75, "004");
@@ -43,7 +57,11 @@ public class UnitTestFurniture {
 	
 	@Test
 	
-	//Test getters in Desk.java
+	/**
+	 * Creates a Desk object and test if the
+	 * getter methods in Desk.java can returne
+	 * the correct information on the parts
+	 */
 	
 	public void testDeskParts() {
 		Desk testDesk = new Desk("D2623", "Standing", "Y", "N", "Y", 50, "003");
@@ -57,7 +75,12 @@ public class UnitTestFurniture {
 	
 	@Test
 	
-	//Test getters in Furinture.java with Desk
+	/**
+	 * Creates a Desk object and test if the
+	 * getter methods in Furinture.java can returne
+	 * the correct information on the ID, type,
+	 * price and manufacture ID
+	 */
 	
 	public void testDeskIdTypePriceManuId() {
 		Desk testDesk = new Desk("D2623", "Standing", "Y", "N", "Y", 50, "003");
@@ -72,7 +95,11 @@ public class UnitTestFurniture {
 
 	@Test
 	
-	//Test getters in Filing.java
+	/**
+	 * Creates a Filing object and test if the
+	 * getter methods in Filing.java can returne
+	 * the correct information on the parts
+	 */
 
 	public void testFilingParts() {
 		Filing testFiling = new Filing("F594", "Small", "Y", "Y", "N", 100, "002");
@@ -86,7 +113,12 @@ public class UnitTestFurniture {
 	
 	@Test
 	
-	//Test getters in Furinture.java with Filing
+	/**
+	 * Creates a Filing object and test if the
+	 * getter methods in Furinture.java can returne
+	 * the correct information on the ID, type,
+	 * price and manufacture ID
+	 */
 	
 	public void testFilingIdTypePriceManuId() {
 		Filing testFiling = new Filing("F594", "Small", "Y", "Y", "N", 100, "002");
@@ -101,7 +133,11 @@ public class UnitTestFurniture {
 	
 	@Test
 	
-	//Test getters in Lamp.java
+	/**
+	 * Creates a Lamp object and test if the
+	 * getter methods in Lamp.java can returne
+	 * the correct information on the parts
+	 */
 
 	public void testLampParts() {
 		Lamp testLamp = new Lamp("L045", "Desk", "Y", "N", 18, "002");
@@ -114,7 +150,12 @@ public class UnitTestFurniture {
 	
 	@Test
 	
-	//Test getters in Furinture.java with Lamp
+	/**
+	 * Creates a Lamp object and test if the
+	 * getter methods in Furinture.java can returne
+	 * the correct information on the ID, type,
+	 * price and manufacture ID
+	 */
 	
 	public void testLampIdTypePriceManuId() {
 		Lamp testLamp = new Lamp("L045", "Desk", "Y", "N", 18, "002");
