@@ -1,7 +1,7 @@
 package edu.ucalgary.ensf409;
 
-import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import java.io.*;
 import java.util.*;
 //import org.junit.contrib.java.lang.system.ExpectedSystemExit;
@@ -9,7 +9,7 @@ import java.util.*;
 public class UnitTestManagement {
 
 	//Enter Username and Password here to test database
-	private Management database = new Management("jdbc:mysql://localhost/inventory","Tyler","ensf409");
+	private Management database = new Management("jdbc:mysql://localhost/inventory","root","Cole_8899");
 
 
 	@Test
@@ -78,5 +78,36 @@ public class UnitTestManagement {
 		}
 		String[] check = {"L223", "L928", "L980", "L982"};
 		assertTrue("An incorrect list of lamps was created", Arrays.equals(idList, check));
+	}
+
+	@Test
+
+	public void updateDatabaseTest() {
+		database.initializeConnection();
+
+		String category = "Chair";
+		FurnitureBuilder myBuilder = new FurnitureBuilder();
+
+		Chair chairOne = new Chair("C0914", "Task", "N", "N", "Y", "Y", 50, "002");
+        Chair chairTwo = new Chair("C1148", "Task", "Y", "N", "Y", "Y", 125, "003");
+        Chair chairThree = new Chair("C3405", "Task", "Y", "Y", "N", "N", 100, "003");
+
+		Furniture[] myList = new Furniture[3];
+		myList[0] = chairOne;
+		myList[1] = chairTwo;
+		myList[2] = chairThree;
+
+		myBuilder.buildFurniture(myList, 1);
+		database.updateDatabase(category, myBuilder);
+
+
+		database.createArray(new String[]{"Task", "Chair"});
+		database.toArray();
+		boolean[][] idList = new boolean[database.listOfFurnitures.length][4];
+		for(int i = 0; i < database.listOfFurnitures.length; i++){
+			idList[i] = database.listOfFurnitures[i].getParts();
+		}
+		boolean[][] check = {new boolean[]{false, false, false, false}, new boolean[]{true, false, true, true}, new boolean[]{false, false, false, false}};
+		assertTrue("An incorrect list of lamps was created", Arrays.deepEquals(idList, check));
 	}
 }
