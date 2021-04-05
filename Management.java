@@ -44,11 +44,11 @@ public class Management {
     /**
      * ArrayList of Furniture objects
      */
-    ArrayList<Furniture> list = new ArrayList<Furniture>();
+    public ArrayList<Furniture> list = new ArrayList<Furniture>();
     /**
      * Array of Furniture objects.
      */
-    Furniture[] listOfFurnitures;
+    public Furniture[] listOfFurnitures;
     /**
      * Converts ArrayList to Array.
      */
@@ -317,6 +317,30 @@ public class Management {
 	 		 setStatement = "Base = 'N', Bulb = 'N'";
 	 	}
 	 	return setStatement;
+	}
+
+
+	/**
+	 * Returns an arrayList of all of the manufacturers
+	 * @param array An array of furniture
+	 * @return An arrayList of all of the manufacturers
+	 */
+	public ArrayList<String> manufacturers(Furniture[] array) {
+		//This method should access the class/method that
+		// connects to the database
+		ArrayList<String> manuIDs = new ArrayList<>();
+		manuIDs.add(array[0].getManuId());
+		for(int i = 1;i<array.length;i++) {
+			for(int j=0; j< manuIDs.size();j++) {
+				if(manuIDs.contains(array[i].getManuId())) {
+					
+				}
+				else {
+					manuIDs.add(array[i].getManuId());
+				}
+			}
+		}
+		return manuIDs;
 	}
 	
 }

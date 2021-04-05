@@ -19,6 +19,8 @@ import java.util.regex.Pattern;
 
 public class User {
 	private static String filename = "orderform1.txt";
+	private static Management myJDBC;
+	private static FurnitureBuilder builder;
 	
 	//Request user's input
 	
@@ -52,14 +54,14 @@ public class User {
 			//e.printStackTrace();
 			System.err.println("Please enter a valid integer amount of items");
 		}
-		Management myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
+		myJDBC = new Management("jdbc:mysql://localhost/inventory","root","Cole_8899");
                 myJDBC.initializeConnection();
 		String[] input1 = {type.trim(),category.trim(),Integer.toString(number)};
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
-		FurnitureBuilder builder = new FurnitureBuilder();
+		builder = new FurnitureBuilder();
 		if(!builder.buildFurniture(myJDBC.listOfFurnitures,number)) {
-			System.out.println("Order cannot be fulfilled based on current inventory. Suggested manufacturers are " +myJDBC.manuIDstoNames(manufacturers(myJDBC.getListOfFurniture()))+".");
+			System.out.println("Order cannot be fulfilled based on current inventory. Suggested manufacturers are " +myJDBC.manuIDstoNames(myJDBC.manufacturers(myJDBC.getListOfFurniture()))+".");
 		}
 		else {
 			orderForm(type.trim(),category.trim(),Integer.toString(number),builder);
@@ -184,25 +186,6 @@ public class User {
 		}
 		
 		
-	}
-	
-	//Prints out the names of possible manufacturers
-	public static ArrayList<String> manufacturers(Furniture[] array) {
-		//This method should access the class/method that
-		// connects to the database
-		ArrayList<String> manuIDs = new ArrayList<>();
-		manuIDs.add(array[0].getManuId());
-		for(int i = 1;i<array.length;i++) {
-			for(int j=0; j< manuIDs.size();j++) {
-				if(manuIDs.contains(array[i].getManuId())) {
-					
-				}
-				else {
-					manuIDs.add(array[i].getManuId());
-				}
-			}
-		}
-		return manuIDs;
 	}
 
 }
