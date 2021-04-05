@@ -4,16 +4,33 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import java.io.*;
 import java.util.*;
-//import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
-public class UnitTestManagementAndFurnitureBuilder {
+/**
+ * 
+ * @author Tyler Galea
+ * @since April 5, 2021
+ * @version 1.1
+ * {@summary} Unit tests for the functionality of FurintureBuilde.java and Management.java together.
+ *
+ */
+
+public class ManagementAndFurnitureBuilderTest {
 	
-	//Enter Username and Password here to test database
+	/**
+	 * The database url, username and password
+	 */
 	private Management database = new Management("jdbc:mysql://localhost/inventory","Tyler","ensf409");
 	
 	@Test
 	
-	//Test Management.java and FurnitureBuilder.java for one set of Mesh Chairs
+	/**
+	 * Make a request for a list of Chairs of type Mesh
+	 * from the database and tests if Management.java
+	 * can send the correct list to FurnitureBuilder.java
+	 * and can return the cheapest combination
+	 * of chairs that can successfully create 1 chair of
+	 * the specified type
+	 */
 	
 	public void testDatabaseFurnitureBuilderChair() {
         database.initializeConnection();
@@ -36,7 +53,13 @@ public class UnitTestManagementAndFurnitureBuilder {
 	
 	@Test
 	
-	//Test Management.java and FurnitureBuilder.java for one set of Kneeling Chairs
+	/**
+	 * Make a request for a list of Chairs of type Kneeling
+	 * from the database and tests if Management.java
+	 * can send the correct list to FurnitureBuilder.java
+	 * and can detect that it is impossible
+	 * to create 1 chair of the specified type
+	 */
 	
 	public void testDatabaseFurnitureBuilderChairNotPossible() {
         database.initializeConnection();
@@ -49,7 +72,14 @@ public class UnitTestManagementAndFurnitureBuilder {
 	
 	@Test
 	
-	//Test Management.java and FurnitureBuilder.java for two sets of Standing Desk
+	/**
+	 * Make a request for a list of Desks of type Standing
+	 * from the database and tests if Management.java
+	 * can send the correct list to FurnitureBuilder.java
+	 * and can return the cheapest combination
+	 * of desks that can successfully create 2 desks of
+	 * the specified type
+	 */
 	
 	public void testDatabaseFurnitureBuilderDesk() {
         database.initializeConnection();
@@ -72,7 +102,14 @@ public class UnitTestManagementAndFurnitureBuilder {
 	
 	@Test
 	
-	//Test Management.java and FurnitureBuilder.java for two sets of Large Filing
+	/**
+	 * Make a request for a list of Filings of type Large
+	 * from the database and tests if Management.java
+	 * can send the correct list to FurnitureBuilder.java
+	 * and can return the cheapest combination
+	 * of filings that can successfully create 2 filings of
+	 * the specified type
+	 */
 	
 	public void testDatabaseFurnitureBuilderFiling() {
         database.initializeConnection();
@@ -95,7 +132,14 @@ public class UnitTestManagementAndFurnitureBuilder {
 	
 	@Test
 	
-	//Test Management.java and FurnitureBuilder.java for three sets of Desk Lamp
+	/**
+	 * Make a request for a list of Lamps of type Desk
+	 * from the database and tests if Management.java
+	 * can send the correct list to FurnitureBuilder.java
+	 * and can return the cheapest combination
+	 * of lamps that can successfully create 3 lamps of
+	 * the specified type
+	 */
 	
 	public void testDatabaseFurnitureBuilderLamp() {
         database.initializeConnection();
