@@ -9,7 +9,7 @@ import java.util.*;
 public class UnitTestManagement {
 
 	//Enter Username and Password here to test database
-	private Management database = new Management("jdbc:mysql://localhost/inventory","root","Cole_8899");
+	private Management database = new Management("jdbc:mysql://localhost/inventory","root","ensf409");
 
 
 	@Test
