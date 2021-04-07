@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 
 public class User {
-	private static String filename = "orderform1.txt";
+	private static String filename = "Orders/orderform1.txt";
 	private static Management myJDBC;
 	private static FurnitureBuilder builder;
 	
@@ -29,6 +29,7 @@ public class User {
 	 * @param args[] An optional command line arguement
 	 */
 	public static void main (String[] args) {
+		try {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Please enter a furniture category:");
@@ -52,14 +53,14 @@ public class User {
 			System.out.print("Please enter the number of items you need:");
 			 number = sc.nextInt();
 			sc.close();
-			System.out.println("You requested "  + number + " "+ category + " " + "of type" + " "+ type);
+			System.out.println("You requested "  + number + " "+ category.trim() + " " + "of type" + " "+ type);
 		}
 		catch(InputMismatchException e) {
 			//e.printStackTrace();
 			System.err.println("Please enter a valid integer amount of items");
 		}
-		myJDBC = new Management("jdbc:mysql://localhost/inventory","root","Cole_8899");
-                myJDBC.initializeConnection();
+		myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
+        myJDBC.initializeConnection();
 		String[] input1 = {type.trim(),category.trim(),Integer.toString(number)};
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
@@ -70,6 +71,10 @@ public class User {
 		else {
 			orderForm(type.trim(),category.trim(),Integer.toString(number),builder);
 			myJDBC.updateDatabase(category.trim(),builder);
+		}
+		}
+		catch(Exception e){
+			System.out.println("The system incountered an error.");
 		}
 		
 		
@@ -141,7 +146,7 @@ public class User {
 		try {	//Create the file if it doesnt exist
 			int i=1;
 			while(form.exists()) {
-				String yes = "orderform";
+				String yes = "Orders/orderform";
 				yes += Integer.toString(i);
 				yes += ".txt";
 				filename = yes;
@@ -183,7 +188,7 @@ public class User {
 				}
 			}
 			String price = Integer.toString(builder.getPrice());
-			System.out.print(" for "+price);
+			System.out.print(" for $"+price+".");
 
 
 			writer.write("\n" +"Total Price: " + price+".");
