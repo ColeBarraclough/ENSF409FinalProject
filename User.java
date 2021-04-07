@@ -80,7 +80,7 @@ public class User {
 		}
 		}
 		catch(Exception e){
-			System.out.println("The system incountered an error.");
+			System.out.println("The system encountered an error.");
 		}
 		
 		
