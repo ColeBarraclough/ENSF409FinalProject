@@ -283,7 +283,7 @@ public class Management {
 		String[] IDs = builder.getIds();
 		for(int i =0 ; i< IDs.length;i++) {
 	        try {
-	            String query = "UPDATE "+category.toLowerCase()+" SET "+this.getSetStatement(category)+" Where ID = ?;";
+	            String query = "DELETE FROM "+category.toLowerCase()+" Where ID = ?;";
 	            
 	            PreparedStatement myStmt = dbConnect.prepareStatement(query);
 
@@ -292,33 +292,11 @@ public class Management {
 	            myStmt.close();
 
 	        } catch (SQLException ex) {
-				System.out.println("Could not update"+category+".");
+				System.out.println("Could not update "+category+".");
 	        }
 		}
 		
     }
-	/**
-	 * Creates a statement that corresponds to setting each part within a category to false.
-	 * @param category the category to which the item belongs.
-	 * @return A String that contains the command needed to sets part availability to false.
-	 */
-	public String getSetStatement(String category) {
-		String setStatement = "";
-	 	if(category.equals("Chair")) {
-	 		 setStatement = "Legs = 'N', Arms = 'N', Seat = 'N', Cushion = 'N'";
-	 	}
-	 	else if(category.equals("Desk")) {
-	 		 setStatement = "Legs = 'N', Top = 'N', Drawer = 'N'";
-	 	}
-	 	else if(category.equals("Filing")) {
-	 		 setStatement = "Rails = 'N', Drawers = 'N', Cabinet = 'N'";
-	 	}
-	 	else {
-	 		 setStatement = "Base = 'N', Bulb = 'N'";
-	 	}
-	 	return setStatement;
-	}
-
 
 	/**
 	 * Returns an arrayList of all of the manufacturers
