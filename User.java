@@ -48,28 +48,34 @@ public class User {
 		}
 		String type = formatString(val2);
 		
-		int number = 0;
-		try {
+		String number = "";
+		boolean natural = false;
+		while(!natural){	
 			System.out.print("Please enter the number of items you need:");
-			 number = sc.nextInt();
-			sc.close();
-			System.out.println("You requested "  + number + " "+ category.trim() + " " + "of type" + " "+ type);
+			number = sc.next();
+			if(isNum(number)){
+				if(Integer.parseInt(number) > 0){
+					natural = true;
+				} else {
+					System.out.println("Please enter a number larger than zero");
+				}
+			} else {
+				System.out.println("Please enter a valid integer");
+			}		
 		}
-		catch(InputMismatchException e) {
-			//e.printStackTrace();
-			System.err.println("Please enter a valid integer amount of items");
-		}
+		sc.close();
+		System.out.println("You requested "  + number + " "+ category.trim() + " " + "of type" + " "+ type);
 		myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
         myJDBC.initializeConnection();
-		String[] input1 = {type.trim(),category.trim(),Integer.toString(number)};
+		String[] input1 = {type.trim(),category.trim(),number};
 		myJDBC.createArray(input1);
 		myJDBC.toArray();
 		builder = new FurnitureBuilder();
-		if(!builder.buildFurniture(myJDBC.listOfFurnitures,number)) {
+		if(!builder.buildFurniture(myJDBC.listOfFurnitures,Integer.parseInt(number))) {
 			System.out.println("Order cannot be fulfilled based on current inventory. Suggested manufacturers are " +myJDBC.manuIDstoNames(myJDBC.manufacturers(myJDBC.getListOfFurniture()))+".");
 		}
 		else {
-			orderForm(type.trim(),category.trim(),Integer.toString(number),builder);
+			orderForm(type.trim(),category.trim(),number,builder);
 			myJDBC.updateDatabase(category.trim(),builder);
 		}
 		}
@@ -102,6 +108,21 @@ public class User {
 	   }
 	   return true;
 		
+	}
+	
+	/**
+	 * Tests to see if the input is a number
+	 * @param num the input to test
+	 * @return true if it is a number
+	 */
+	public static boolean isNum(String num) {
+		try {
+			Integer.parseInt(num);
+		}
+		catch(NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 	
 	/**
