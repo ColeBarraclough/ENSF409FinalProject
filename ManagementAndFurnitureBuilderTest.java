@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * 
- * @author Tyler Galea
+ * @author Adeshpal Virk, Hannah Oluyemisi Asaolu, Tyler Galea, Cole Barraclough
  * @since April 5, 2021
  * @version 1.1
  * {@summary} Unit tests for the functionality of FurintureBuilde.java and Management.java together.

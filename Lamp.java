@@ -1,7 +1,7 @@
 package edu.ucalgary.ensf409;
 /**
  * 
- * @author Adeshpal Virk
+ * @author Adeshpal Virk, Hannah Oluyemisi Asaolu, Tyler Galea, Cole Barraclough
  * @since March 27, 2021
  * @version 1.0
  * {@summary} Furniture subclass for object Lamp.

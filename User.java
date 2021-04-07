@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * 
- * @author Hannah Oluyemisi Asaolu
+ * @author Adeshpal Virk, Hannah Oluyemisi Asaolu, Tyler Galea, Cole Barraclough
  * @since March 27, 2021
  * @version 1.0
  * {@summary} This class takes in the user input for 
@@ -23,7 +23,11 @@ public class User {
 	private static FurnitureBuilder builder;
 	
 	//Request user's input
-	
+	/**
+	 * The main class that takes in user requests and tries
+	 * to proccess the data
+	 * @param args[] An optional command line arguement
+	 */
 	public static void main (String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
@@ -75,7 +79,14 @@ public class User {
 			// if false, calls manufacturers
 			
 	}
-	//Checks that the input string argument is strictly letters - no numbers, or other weird characters
+
+
+	/**
+	 * Tests to see if the input is all 
+	 * characters in the alphabet or spaces
+	 * @param str the input to test
+	 * @return true if it is all alphabet or spaces
+	 */
 	public static boolean isAlpha(String str) {
 	   char [] arr = str.toCharArray();
 	   
@@ -88,7 +99,11 @@ public class User {
 		
 	}
 	
-		//Cleans up the String to make it acceptable to the database
+	/**
+	 * Changes the format of a String to all capital first letters in between spaces
+	 * @param arg the string to change
+	 * @return the formatted string
+	 */
 	public static String formatString(String arg) {
 		String str = arg.trim();
 		String result ="";
@@ -106,6 +121,13 @@ public class User {
 		return result;
 	}
 	
+	/**
+	 * Generates the order form and makes a new file
+	 * @param type The type of furniture
+	 * @param category the category of furniture
+	 * @param number The number of items made
+	 * @param builder the furniture builder object
+	 */
 	public static void orderForm(String type,String category,String number,FurnitureBuilder builder) {
 		File form = new File(filename);
 		BufferedWriter writer = null;

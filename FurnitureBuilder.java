@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * 
- * @author Cole Barraclough
+ * @author Adeshpal Virk, Hannah Oluyemisi Asaolu, Tyler Galea, Cole Barraclough
  * @since March 27, 2021
  * @version 1.2
  * {@summary} This class will be used to calculate the lowest price for a 

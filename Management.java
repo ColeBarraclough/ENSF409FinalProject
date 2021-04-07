@@ -8,7 +8,7 @@ import javax.management.Query;
 
 /**
  * 
- * @author Adeshpal Virk
+ * @author Adeshpal Virk, Hannah Oluyemisi Asaolu, Tyler Galea, Cole Barraclough
  * @since March 27, 2021
  * @version 1.0
  * {@summary} This class connects to the database and is used to retrieve data within the database.
