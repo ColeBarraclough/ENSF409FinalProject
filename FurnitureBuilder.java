@@ -80,7 +80,7 @@ public class FurnitureBuilder {
      * @param amount The amount of furniture that is required to be built
      * @return An ArrayList that contians the ArrayList that contains each combination of ArrayLists that can make that much furniture
      */
-    public ArrayList<ArrayList<ArrayList<Furniture>>> getAmountListsNoOverlap(ArrayList<ArrayList<Furniture>> origList, int amount) {
+    private ArrayList<ArrayList<ArrayList<Furniture>>> getAmountListsNoOverlap(ArrayList<ArrayList<Furniture>> origList, int amount) {
         ArrayList<ArrayList<ArrayList<Furniture>>> noOverlapList = new ArrayList<ArrayList<ArrayList<Furniture>>>();
         for(int i = 0; i < origList.size(); i++) {
             ArrayList<ArrayList<Furniture>> temp = new ArrayList<ArrayList<Furniture>>();
@@ -107,7 +107,7 @@ public class FurnitureBuilder {
      * @param myArray An ArrayList that contians the ArrayList that contains each combination of ArrayLists that can make that much furniture
      * @return An ArrayList containing another ArrayList that represents the cheapest way that all of the furniture can be built
      */
-    public ArrayList<ArrayList<Furniture>> findCheapestOption(ArrayList<ArrayList<ArrayList<Furniture>>> myArray) {
+    private ArrayList<ArrayList<Furniture>> findCheapestOption(ArrayList<ArrayList<ArrayList<Furniture>>> myArray) {
         ArrayList<ArrayList<Furniture>> cheapestList = new ArrayList<ArrayList<Furniture>>();
         int cheapest = -1;
         for (int i = 0; i < myArray.size(); i++) {
