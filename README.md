@@ -9,3 +9,5 @@ entering the input. Finally the program will prompt you to enter the amount of f
 the program will output the items used to build the peice, the price and an order form will generate in a directory called Orders in you package
 folder. If it cannot be made a list of possible manufactuerers will be outputed. If any input cannot be found in the database the program will
 tell you that it has encountered an error and at that point you will have to execute the program again.
+
+NOTE: If you like to run any of the unit tests please update their URL, USERNAME, and PASSWORD as well.
