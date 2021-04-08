@@ -212,7 +212,7 @@ public class User {
 			System.out.print(" for $"+price+".");
 
 
-			writer.write("\n" +"Total Price: " + price+".");
+			writer.write("\n" +"Total Price: $" + price+".");
 		}
 		catch (Exception e) {
 		      System.err.println("I/O error opening/writing file.");
