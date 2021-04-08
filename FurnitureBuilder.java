@@ -182,7 +182,7 @@ public class FurnitureBuilder {
      * @param toCheck An ArrayList of furniture objects
      * @return True if both the paramateres share an element 
      */
-    public boolean checkOverlap(ArrayList<ArrayList<Furniture>> origList, ArrayList<Furniture> toCheck) {
+    private boolean checkOverlap(ArrayList<ArrayList<Furniture>> origList, ArrayList<Furniture> toCheck) {
         for (int i = 0; i < origList.size(); i++) {
             for (int j = 0; j < origList.get(i).size(); j++) {
                 for (int k = 0; k < toCheck.size(); k++) {
