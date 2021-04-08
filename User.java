@@ -21,6 +21,10 @@ public class User {
 	private static String filename = "Orders/orderform1.txt";
 	private static Management myJDBC;
 	private static FurnitureBuilder builder;
+	private static final String URL = "";
+	private static final String USERNAME = "";
+	private static final String PASSWORD = "";
+	
 	
 	//Request user's input
 	/**
@@ -65,7 +69,7 @@ public class User {
 		}
 		sc.close();
 		System.out.println("You requested "  + number + " "+ category.trim() + " " + "of type" + " "+ type);
-		myJDBC = new Management("jdbc:mysql://localhost/inventory","adesh","ensf409");
+		myJDBC = new Management(URL,USERNAME,PASSWORD);
         myJDBC.initializeConnection();
 		String[] input1 = {type.trim(),category.trim(),number};
 		myJDBC.createArray(input1);
