@@ -165,6 +165,12 @@ public class User {
 		}
 		
 		try {	//Create the file if it doesnt exist
+			File directory = new File("Orders");
+			if (! directory.exists()){
+				directory.mkdir();
+				// If you require it to make the entire directory path including parents,
+				// use directory.mkdirs(); here instead.
+			}
 			int i=1;
 			while(form.exists()) {
 				String yes = "Orders/orderform";
