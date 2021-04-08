@@ -2,7 +2,6 @@ package edu.ucalgary.ensf409;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * 
@@ -21,12 +20,13 @@ public class User {
 	private static String filename = "Orders/orderform1.txt";
 	private static Management myJDBC;
 	private static FurnitureBuilder builder;
-	private static final String URL = "";
-	private static final String USERNAME = "";
-	private static final String PASSWORD = "";
+	protected static final String URL = "jdbc:mysql://localhost/inventory"; //Change the url if neccasary
+	protected static final String USERNAME = ""; //Add your username
+	protected static final String PASSWORD = ""; //Add your password
 	
 	
-	//Request user's input
+	//INSTRUCTIONS TO RUN PROGRAM CAN BE FOUND IN README.md
+
 	/**
 	 * The main class that takes in user requests and tries
 	 * to proccess the data
@@ -34,65 +34,60 @@ public class User {
 	 */
 	public static void main (String[] args) {
 		try {
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("Please enter a furniture category:");
-		String val1 = sc.nextLine();
-		while (isAlpha(val1) == false) {
-			System.out.println("Enter a valid category containing only alphabetic characters");
-			val1 = sc.nextLine();
-		}
-		String category = formatString(val1);
-		
-		System.out.print("Please enter a furniture type:");
-		String val2 = sc.nextLine();
-		while (isAlpha(val2) == false) {
-			System.out.println("Enter a valid type containing only alphabetic characters");
-			val2 = sc.nextLine();
-		}
-		String type = formatString(val2);
-		
-		String number = "";
-		boolean natural = false;
-		while(!natural){	
-			System.out.print("Please enter the number of items you need:");
-			number = sc.next();
-			if(isNum(number)){
-				if(Integer.parseInt(number) > 0){
-					natural = true;
+			Scanner sc = new Scanner(System.in);
+			
+			System.out.print("Please enter a furniture category:");
+			String val1 = sc.nextLine();
+			while (isAlpha(val1) == false) {
+				System.out.println("Enter a valid category containing only alphabetic characters");
+				val1 = sc.nextLine();
+			}
+			String category = formatString(val1);
+			
+			System.out.print("Please enter a furniture type:");
+			String val2 = sc.nextLine();
+			while (isAlpha(val2) == false) {
+				System.out.println("Enter a valid type containing only alphabetic characters");
+				val2 = sc.nextLine();
+			}
+			String type = formatString(val2);
+			
+			String number = "";
+			boolean natural = false;
+			while(!natural){	
+				System.out.print("Please enter the number of items you need:");
+				number = sc.next();
+				if(isNum(number)){
+					if(Integer.parseInt(number) > 0){
+						natural = true;
+					} else {
+						System.out.println("Please enter a number greater than zero");
+					}
 				} else {
-					System.out.println("Please enter a number greater than zero");
-				}
-			} else {
-				System.out.println("Please enter a valid integer");
-			}		
-		}
-		sc.close();
-		System.out.println("You requested "  + number + " "+ category.trim() + " " + "of type" + " "+ type);
-		myJDBC = new Management(URL,USERNAME,PASSWORD);
-        myJDBC.initializeConnection();
-		String[] input1 = {type.trim(),category.trim(),number};
-		myJDBC.createArray(input1);
-		myJDBC.toArray();
-		builder = new FurnitureBuilder();
-		if(!builder.buildFurniture(myJDBC.listOfFurnitures,Integer.parseInt(number))) {
-			System.out.println("Order cannot be fulfilled based on current inventory. Suggested manufacturers are " +myJDBC.manuIDstoNames(myJDBC.manufacturers(myJDBC.getListOfFurniture()))+".");
-		}
-		else {
-			orderForm(type.trim(),category.trim(),number,builder);
-			myJDBC.updateDatabase(category.trim(),builder);
-		}
+					System.out.println("Please enter a valid integer");
+				}		
+			}
+			sc.close();
+			System.out.println("You requested "  + number + " "+ category.trim() + " " + "of type" + " "+ type);
+			myJDBC = new Management(URL,USERNAME,PASSWORD);
+			myJDBC.initializeConnection();
+			String[] input1 = {type.trim(),category.trim(),number};
+			myJDBC.createArray(input1);
+			myJDBC.toArray();
+			builder = new FurnitureBuilder();
+			if(!builder.buildFurniture(myJDBC.listOfFurnitures,Integer.parseInt(number))) {
+				System.out.println("Order cannot be fulfilled based on current inventory. Suggested manufacturers are " +myJDBC.manuIDstoNames(myJDBC.manufacturers(myJDBC.getListOfFurniture()))+".");
+			}
+			else {
+				orderForm(type.trim(),category.trim(),number,builder);
+				myJDBC.updateDatabase(category.trim(),builder);
+			}
+			myJDBC.close();
 		}
 		catch(Exception e){
 			System.out.println("The system encountered an error.");
-		}
-		
-		
-		//call method to determine if the request can be filled
-		//fillRequest()
-			// if true, calls orderForm
-			// if false, calls manufacturers
 			
+		}	
 	}
 
 

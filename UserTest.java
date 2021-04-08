@@ -1,9 +1,7 @@
 package edu.ucalgary.ensf409;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * 
@@ -17,7 +15,7 @@ import org.junit.jupiter.api.Test;
  *
  */
 
-class UserTest {
+public class UserTest {
 
 	/**
 	 * Test to see if the string is properly formatted

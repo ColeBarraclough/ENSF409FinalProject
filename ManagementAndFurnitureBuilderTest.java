@@ -19,7 +19,7 @@ public class ManagementAndFurnitureBuilderTest {
 	/**
 	 * The database url, username and password
 	 */
-	private Management database = new Management("jdbc:mysql://localhost/inventory","Tyler","ensf409");
+	private Management database = new Management(User.URL,User.USERNAME,User.PASSWORD);
 	
 	@Test
 	

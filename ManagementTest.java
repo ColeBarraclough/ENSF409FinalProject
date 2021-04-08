@@ -19,7 +19,7 @@ public class ManagementTest {
 	/**
 	 * The database url, username and password
 	 */
-	private Management database = new Management("jdbc:mysql://localhost/inventory","root","ensf409");
+	private Management database = new Management(User.URL,User.USERNAME,User.PASSWORD);
 
 
 	@Test
@@ -139,7 +139,7 @@ public class ManagementTest {
 		for(int i = 0; i < database.listOfFurnitures.length; i++){
 			idList[i] = database.listOfFurnitures[i].getParts();
 		}
-		boolean[][] check = {new boolean[]{false, false, false, false}, new boolean[]{true, false, true, true}, new boolean[]{false, false, false, false}};
-		assertTrue("An incorrect list of lamps was created", Arrays.deepEquals(idList, check));
+		boolean[][] check = {new boolean[]{true, false, true, true}};
+		assertTrue("An incorrect list of Chairs was created", Arrays.deepEquals(idList, check));
 	}
 }

@@ -1,10 +1,8 @@
 package edu.ucalgary.ensf409;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-import javax.management.Query;
+
 
 /**
  * 
@@ -133,7 +131,9 @@ public class Management {
 			myStmt.close();
 		}catch(SQLException ex){
 			System.out.println("Could not get the names from table chair.");
+			
 		}
+		
 		return ;
 	}
 	/**
@@ -319,6 +319,18 @@ public class Management {
 			}
 		}
 		return manuIDs;
+	}
+
+	/**
+	 * Closes the connection
+	 */
+	public void close() {
+		try{
+			dbConnect.close();
+			results.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
