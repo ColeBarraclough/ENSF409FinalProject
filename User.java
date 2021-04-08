@@ -35,7 +35,7 @@ public class User {
 		System.out.print("Please enter a furniture category:");
 		String val1 = sc.nextLine();
 		while (isAlpha(val1) == false) {
-			System.out.println("Enter enter a valid category containing only alphabets");
+			System.out.println("Enter a valid category containing only alphabetic characters");
 			val1 = sc.nextLine();
 		}
 		String category = formatString(val1);
@@ -43,7 +43,7 @@ public class User {
 		System.out.print("Please enter a furniture type:");
 		String val2 = sc.nextLine();
 		while (isAlpha(val2) == false) {
-			System.out.println("Enter enter a valid type containing only alphabets");
+			System.out.println("Enter a valid type containing only alphabetic characters");
 			val2 = sc.nextLine();
 		}
 		String type = formatString(val2);
@@ -57,7 +57,7 @@ public class User {
 				if(Integer.parseInt(number) > 0){
 					natural = true;
 				} else {
-					System.out.println("Please enter a number larger than zero");
+					System.out.println("Please enter a number greater than zero");
 				}
 			} else {
 				System.out.println("Please enter a valid integer");
