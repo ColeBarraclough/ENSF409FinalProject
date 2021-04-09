@@ -21,8 +21,8 @@ public class User {
 	private static Management myJDBC;
 	private static FurnitureBuilder builder;
 	protected static final String URL = "jdbc:mysql://localhost/inventory"; //Change the url if neccasary
-	protected static final String USERNAME = ""; //Add your username
-	protected static final String PASSWORD = ""; //Add your password
+	protected static final String USERNAME = "root"; //Add your username
+	protected static final String PASSWORD = "Cole_8899"; //Add your password
 	
 	
 	//INSTRUCTIONS TO RUN PROGRAM CAN BE FOUND IN README.md
@@ -83,6 +83,8 @@ public class User {
 				myJDBC.updateDatabase(category.trim(),builder);
 			}
 			myJDBC.close();
+		} catch (IllegalArgumentException e) {
+			System.out.println("The furniture requested does not exist.");
 		}
 		catch(Exception e){
 			System.out.println("The system encountered an error.");

@@ -30,7 +30,7 @@ public class ManagementTest {
 	 * can return the correct list of Chairs
 	 */
 	
-	public void testDatabaseChair() {
+	public void createArrayChairTest() {
         database.initializeConnection();
 		String[] request = {"Mesh", "Chair"};
 		database.createArray(request);
@@ -51,7 +51,7 @@ public class ManagementTest {
 	 * can return the correct list of Desks
 	 */
 	
-	public void testDatabaseDesk() {
+	public void createArrayDeskTest() {
         database.initializeConnection();
 		String[] request = {"Traditional", "Desk"};
 		database.createArray(request);
@@ -72,7 +72,7 @@ public class ManagementTest {
 	 * can return the correct list of Filings
 	 */
 	
-	public void testDatabaseFiling() {
+	public void createArrayFilingTest() {
         database.initializeConnection();
 		String[] request = {"Small", "Filing"};
 		database.createArray(request);
@@ -93,7 +93,7 @@ public class ManagementTest {
 	 * can return the correct list of Lamps
 	 */
 	
-	public void testDatabaseLamp() {
+	public void createArrayLampTest() {
         database.initializeConnection();
 		String[] request = {"Study", "Lamp"};
 		database.createArray(request);
@@ -104,6 +104,32 @@ public class ManagementTest {
 		}
 		String[] check = {"L223", "L928", "L980", "L982"};
 		assertTrue("An incorrect list of lamps was created", Arrays.equals(idList, check));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+
+	/**
+	 * Make a request for a list of Lumps of type Study
+	 * from the database. These don't exist so should throw
+	 * an IllegalArgumentException.
+	 */
+	public void createArrayIllegalInputTest() {
+		database.initializeConnection();
+		String[] request = {"Study", "Lump"};
+		database.createArray(request);
+
+	}
+
+	@Test
+	/**
+	 * Make a request for a list of Lamps of type Stady
+	 * from the database. These don't exist but will create an empty list
+	 */
+	public void createArrayNonExistantInputTest() {
+		database.initializeConnection();
+		String[] request = {"Stady", "Lamp"};
+		database.createArray(request);
+		assertTrue("List created was not empty", database.getListOfFurniture() == null);
 	}
 
 	@Test
@@ -142,4 +168,6 @@ public class ManagementTest {
 		boolean[][] check = {new boolean[]{true, false, true, true}};
 		assertTrue("An incorrect list of Chairs was created", Arrays.deepEquals(idList, check));
 	}
+
+	
 }

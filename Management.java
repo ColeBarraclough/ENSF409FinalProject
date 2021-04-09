@@ -215,7 +215,7 @@ public class Management {
 							results.getString("ManuID"));
 					list.add(temp);
 				}
-                
+
 			}
 			
 			myStmt.close();
@@ -228,7 +228,7 @@ public class Management {
 	 * Determines which furniture category is being requested.
 	 * @param input A string array that contains the full request of the user.
 	 */
-	public void createArray(String[] input) {
+	public void createArray(String[] input) throws IllegalArgumentException {
 	 String table = input[1];
 	 	if(table.equals("Chair")) {
 	 		this.chairArray(input[0]);
@@ -241,7 +241,9 @@ public class Management {
 	 	}
 	 	else if(table.equals("Lamp")) {
 	 		this.lampArray(input[0]);
-	 	}
+	 	} else {
+			 throw new IllegalArgumentException();
+		 }
 	 
  }
 	
@@ -283,7 +285,7 @@ public class Management {
 		String[] IDs = builder.getIds();
 		for(int i =0 ; i< IDs.length;i++) {
 	        try {
-	            String query = "DELETE FROM "+category.toLowerCase()+" Where ID = ?;";
+	            String query = "DELETE FROM "+ category.toLowerCase()+" Where ID = ?;";
 	            
 	            PreparedStatement myStmt = dbConnect.prepareStatement(query);
 

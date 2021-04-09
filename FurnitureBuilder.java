@@ -28,7 +28,35 @@ public class FurnitureBuilder {
      * @param amount The amount of furniture to be built
      * @return true if it was possible to be built false if not
      */
-    public boolean buildFurniture(Furniture[] list, int amount) {
+    public boolean buildFurniture(Furniture[] list, int amount) throws IllegalArgumentException {
+        if (list.length == 0) {
+            return false;
+        }
+        for (int i = 0; i < list.length; i++) {
+            if (!list[0].getType().equals(list[i].getType())) {
+                throw new IllegalArgumentException();
+            }
+            if (list[0] instanceof Chair) {
+                if (!(list[i] instanceof Chair)) {
+                    throw new IllegalArgumentException();
+                }
+            }
+            if (list[0] instanceof Desk) {
+                if (!(list[i] instanceof Desk)) {
+                    throw new IllegalArgumentException();
+                }
+            }
+            if (list[0] instanceof Filing) {
+                if (!(list[i] instanceof Filing)) {
+                    throw new IllegalArgumentException();
+                }
+            }
+            if (list[0] instanceof Lamp) {
+                if (!(list[i] instanceof Lamp)) {
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
         buildList = findCheapestOption(getAmountListsNoOverlap(checkArray(findAllSubsets(list)), amount));
         if (buildList.isEmpty()) {
             return false;
