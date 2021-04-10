@@ -30,7 +30,7 @@ public class ManagementTest {
 	 * can return the correct list of Chairs
 	 */
 	
-	public void createArrayChairTest() {
+	public void testCreateArrayChair() {
         database.initializeConnection();
 		String[] request = {"Mesh", "Chair"};
 		database.createArray(request);
@@ -51,7 +51,7 @@ public class ManagementTest {
 	 * can return the correct list of Desks
 	 */
 	
-	public void createArrayDeskTest() {
+	public void testCreateArrayDesk() {
         database.initializeConnection();
 		String[] request = {"Traditional", "Desk"};
 		database.createArray(request);
@@ -72,7 +72,7 @@ public class ManagementTest {
 	 * can return the correct list of Filings
 	 */
 	
-	public void createArrayFilingTest() {
+	public void testCreateArrayFiling() {
         database.initializeConnection();
 		String[] request = {"Small", "Filing"};
 		database.createArray(request);
@@ -93,7 +93,7 @@ public class ManagementTest {
 	 * can return the correct list of Lamps
 	 */
 	
-	public void createArrayLampTest() {
+	public void  testCreateArrayLamp() {
         database.initializeConnection();
 		String[] request = {"Study", "Lamp"};
 		database.createArray(request);
@@ -113,7 +113,7 @@ public class ManagementTest {
 	 * from the database. These don't exist so should throw
 	 * an IllegalArgumentException.
 	 */
-	public void createArrayIllegalInputTest() {
+	public void testCreateArrayIllegalInput() {
 		database.initializeConnection();
 		String[] request = {"Study", "Lump"};
 		database.createArray(request);
@@ -125,7 +125,7 @@ public class ManagementTest {
 	 * Make a request for a list of Lamps of type Stady
 	 * from the database. These don't exist but will create an empty list
 	 */
-	public void createArrayNonExistantInputTest() {
+	public void testCreateArrayNonExistantInput() {
 		database.initializeConnection();
 		String[] request = {"Stady", "Lamp"};
 		database.createArray(request);
@@ -140,15 +140,15 @@ public class ManagementTest {
 	 * the purchased chairs form the database
 	 */
 
-	public void updateDatabaseTest() {
+	public void testUpdateDatabase() {
 		database.initializeConnection();
 
 		String category = "Chair";
 		FurnitureBuilder myBuilder = new FurnitureBuilder();
 
 		Chair chairOne = new Chair("C0914", "Task", "N", "N", "Y", "Y", 50, "002");
-        Chair chairTwo = new Chair("C1148", "Task", "Y", "N", "Y", "Y", 125, "003");
-        Chair chairThree = new Chair("C3405", "Task", "Y", "Y", "N", "N", 100, "003");
+        	Chair chairTwo = new Chair("C1148", "Task", "Y", "N", "Y", "Y", 125, "003");
+        	Chair chairThree = new Chair("C3405", "Task", "Y", "Y", "N", "N", 100, "003");
 
 		Furniture[] myList = new Furniture[3];
 		myList[0] = chairOne;
