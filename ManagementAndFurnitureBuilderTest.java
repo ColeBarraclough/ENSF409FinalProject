@@ -47,7 +47,7 @@ public class ManagementAndFurnitureBuilderTest {
 				idList[i][j] = test.get(i).get(j).getId();
 			}
 		}
-		String[][] check = {{"C0942", "C9890"}};
+		String[][] check = {{"C6748", "C8138", "C9890"}};
 		assertTrue("A non-cheapest list of chairs was returned", Arrays.deepEquals(idList, check));
 	}
 	
