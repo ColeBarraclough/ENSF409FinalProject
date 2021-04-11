@@ -20,8 +20,17 @@ public class User {
 	private static String filename = "Orders/orderform1.txt";
 	private static Management myJDBC;
 	private static FurnitureBuilder builder;
+	/**
+	 * mysql URL 
+	 */
 	protected static final String URL = "jdbc:mysql://localhost/inventory"; //Change the url if neccasary
+	/**
+	 * mysql Username 
+	 */
 	protected static final String USERNAME = "root"; //Add your username
+	/**
+	 * mysql Password 
+	 */
 	protected static final String PASSWORD = "Cole_8899"; //Add your password
 	
 	

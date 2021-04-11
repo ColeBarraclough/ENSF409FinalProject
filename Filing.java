@@ -32,7 +32,7 @@ public class Filing extends Furniture {
 	 * @param id Filing id
 	 * @param type Filing type
 	 * @param rails Filing rails availability
-	 * @param drawer Filing drawer availability
+	 * @param drawers Filing drawer availability
 	 * @param cabinet Filing cabinet availability
 	 * @param price Filing price
 	 * @param manuId Filing's manufacturer ID.

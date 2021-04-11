@@ -48,11 +48,14 @@ public class Management {
      */
     public Furniture[] listOfFurnitures;
     /**
-     * Converts ArrayList to Array.
+	 * @return Array of Furniture objects.
      */
     public Furniture[] getListOfFurniture() {
     	return listOfFurnitures;
     }
+	/**
+	* Converts ArrayList to Array 
+	*/
     public void toArray() {
     	listOfFurnitures = new Furniture[list.size()];
     	for(int i=0; i< list.size();i++) {
