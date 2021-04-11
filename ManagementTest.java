@@ -8,8 +8,8 @@ import java.util.*;
 /**
  * 
  * @author Adeshpal Virk, Hannah Oluyemisi Asaolu, Tyler Galea, Cole Barraclough
- * @since April 5, 2021
- * @version 1.1
+ * @since April 11, 2021
+ * @version 1.2
  * {@summary} Unit tests for the functionality of Management.java.
  *
  */
@@ -147,8 +147,8 @@ public class ManagementTest {
 		FurnitureBuilder myBuilder = new FurnitureBuilder();
 
 		Chair chairOne = new Chair("C0914", "Task", "N", "N", "Y", "Y", 50, "002");
-        	Chair chairTwo = new Chair("C1148", "Task", "Y", "N", "Y", "Y", 125, "003");
-        	Chair chairThree = new Chair("C3405", "Task", "Y", "Y", "N", "N", 100, "003");
+        Chair chairTwo = new Chair("C1148", "Task", "Y", "N", "Y", "Y", 125, "003");
+        Chair chairThree = new Chair("C3405", "Task", "Y", "Y", "N", "N", 100, "003");
 
 		Furniture[] myList = new Furniture[3];
 		myList[0] = chairOne;
@@ -168,6 +168,82 @@ public class ManagementTest {
 		boolean[][] check = {new boolean[]{true, false, true, true}};
 		assertTrue("An incorrect list of Chairs was created", Arrays.deepEquals(idList, check));
 	}
-
 	
+	@Test
+	
+	/** 
+	* Tests that entering a type of chair that does not exist
+	* in the database results in an empty list
+	*/
+
+	public void testManagementChairArray() {
+		database.initializeConnection();
+		database.chairArray("Premium");
+		assertTrue("List created was not empty", database.getListOfFurniture() == null);
+	}
+	
+	@Test
+	
+	/**
+	* Tests that entering a type of desk that does not exist
+	*  in the database results in an empty list
+	*/
+
+	public void testManagementDeskArray() {
+		database.initializeConnection();
+		database.deskArray("Extendable");
+		assertTrue("List created was not empty", database.getListOfFurniture() == null);
+	}
+	
+	@Test
+	
+	/**
+	* Tests that entering a  type of filing that does not exist
+	* in the database results in an empty list
+	*/
+
+	public void testManagementFilingArray() {
+		database.initializeConnection();
+		database.filingArray("Grand");
+		assertTrue("List created was not empty", database.getListOfFurniture() == null);
+	}
+	
+	@Test
+	
+	/**
+	* Tests that entering a  type of lamp that does not exist
+	* in the database results in an empty list
+	*/
+	
+	public void testManagementLampArray() {
+		database.initializeConnection();
+		database.lampArray("Shade");
+		assertTrue("List created was not empty", database.getListOfFurniture() == null);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	
+	/**
+	* Tests that if a category isnt a valid entry in the database, 
+	* it will generate an IllegalArgumentException
+	*/
+	
+	public void testCreateArray() {
+		database.initializeConnection();
+		String [] input = {"Traditional", "Table"};
+		database.createArray(input);
+	}
+	
+	@Test
+	
+	/**
+	* Tests that an arraylist of ManuID will return the correct manufacturers
+	*/
+	
+	public void testManuIDsToNames() {
+		database.initializeConnection();
+		ArrayList<String> input = new ArrayList<String>();
+		input.add("002"); input.add("000"); input.add("005");
+		assertTrue("String returned was incorrect", database.manuIDstoNames(input).equals("Office Furnishings, Fine Office Supplies"));
+	}
 }
