@@ -7,7 +7,7 @@ Instructions to use the program.
 
 1. Open the User.java file and fill in the URL, USERNAME and PASSWORD fields with your information
 
-2. Navigate to the ENSF409FinalProject folder on your cmd and compile the program using javac edu/ucalgary/ensf409/User.java if it is running on windows
+2. Navigate to the 44 folder on your cmd and compile the program using javac edu/ucalgary/ensf409/User.java if it is running on windows
 
 3. Run the program using java -cp .;mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.User if it is running on windows
 
