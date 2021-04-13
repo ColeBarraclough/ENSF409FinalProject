@@ -22,7 +22,7 @@ manufactuerers if the type of furniture exits. The used furniture will be remove
 
 Instructions to run the unit tests.
 
-1. Update the database back to the origonal using source [path-to-file]\inventory.sql
+1. Update the database back to the original using source [path-to-file]\inventory.sql
 
 2. Compile the unit test using javac -cp .;hamcrest-core-1.3.jar;junit-4.13.2.jar edu/ucalgary/ensf409/[Desired-unit-test].java
 
