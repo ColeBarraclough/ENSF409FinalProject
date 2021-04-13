@@ -14,6 +14,10 @@ import java.util.*;
  *
  */
 
+ //IMPORTANT
+ // Make sure to update the database back to the origonal before running these tests
+ //IMPORTANT
+
 public class ManagementTest {
 
 	/**

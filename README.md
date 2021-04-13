@@ -5,13 +5,27 @@ When downloading the program please download to the directory edu/ucalgary/ensf4
 
 Instructions to use the program.
 
-This is a program that is executed in the command prompt. The first step to use the program is to fill in the URL, USERNAME and PASSWORD
-fields in the User class. After that you may compile and run the program (make sure that mysql-connector is in the class path). The program
-will prompt you to enter the category of the furniture to be built, here you may enter chair, desk, lamp and filing, capitalization does not
-matter. After the program will prompt the type of furniture to be entered, make sure that the type of furniture exists in the database before
-entering the input. Finally, the program will prompt you to enter the amount of furniture you would like to make. If the order can be fulfilled
-the program will output the items used to build the piece, the price and an order form will generate in a directory called Orders in your package
-folder. If your order cannot be made, a list of possible manufacturers will be outputted. If any input cannot be found in the database, the program will
-tell you that it has encountered an error and at that point you will have to execute the program again.
+1. Open the User.java file and fill in the URL, USERNAME and PASSWORD fields with your information
 
-NOTE: If you would like to run any of the unit tests, please make sure your database is the same as the original downloaded from this file and has not been updated!
+2. Compile the program using javac edu/ucalgary/ensf409/User.java if it is running on windows
+
+3. Run the program using java -cp .;mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.User if it is running on windows
+
+4. The program will prompt you to enter the category of the furniture. Here enter Chair, Desk, Lamp or filing (Capitilization not important)
+
+5. The program will prompt you to enter the type of the furniture. Here enter the type of furniture desired (Capitilization not important)
+
+6. The program will prompt you to enter the amount of the furniture. The input must be greater then 0
+
+7. After all of this is inputed the program will find the cheapest way to build that furniture. If it is successful an order file will be created in the Orders directory and it will display the items used and the price. If it is not successful it will suggest a list of
+manufactuerers if the type of furniture exits. The used furniture will be removed from the database as well.
+
+Instructions to run the unit tests.
+
+1. Update the database back to the origonal using source [path-to-file]\inventory.sql
+
+2. Compile the unit test using javac -cp .;hamcrest-core-1.3.jar;junit-4.13.2.jar edu/ucalgary/ensf409/[Desired-unit-test].java
+
+3. Run the unit test using java -cp .;hamcrest-core-1.3.jar;junit-4.13.2.jar;mysql-connector-java-8.0.23.jar org.junit.runner.JUnitCore edu.ucalgary.ensf409.[Desired-unit-test]
+
+

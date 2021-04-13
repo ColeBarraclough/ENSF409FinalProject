@@ -32,6 +32,9 @@ public class FurnitureBuilder {
         if (list.length == 0) {
             return false;
         }
+        if (amount < 0) {
+            throw new IllegalArgumentException();
+        }
         for (int i = 0; i < list.length; i++) {
             if (!list[0].getType().equals(list[i].getType())) {
                 throw new IllegalArgumentException();

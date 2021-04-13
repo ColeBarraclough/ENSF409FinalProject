@@ -35,11 +35,17 @@ public class Furniture {
 	 * @param price Filing price
 	 * @param manuId Filing's manufacturer ID.
 	 */
-    public Furniture(String id, String type, String[] parts, int price, String manuId) {
+    public Furniture(String id, String type, String[] parts, int price, String manuId)  throws IllegalArgumentException {
+        if (price < 0) {
+            throw new IllegalArgumentException();
+        }
         this.id = id;
         this.type = type;
         this.parts = new boolean[parts.length];
         for (int i = 0; i < parts.length; i++) {
+            if (!(parts[i].equals("Y") || parts[i].equals("N"))) {
+                throw new IllegalArgumentException();
+            }
             this.parts[i] = torF(parts[i]);
         }
         this.price = price;

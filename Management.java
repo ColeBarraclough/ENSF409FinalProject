@@ -330,9 +330,13 @@ public class Management {
 	 * Closes the connection
 	 */
 	public void close() {
-		try{
-			dbConnect.close();
-			results.close();
+		try {
+			if (dbConnect != null) {
+				dbConnect.close();
+			}
+			if (results != null) {
+				results.close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -88,16 +88,19 @@ public class User {
 				System.out.println("Order cannot be fulfilled based on current inventory. Suggested manufacturers are " +myJDBC.manuIDstoNames(myJDBC.manufacturers(myJDBC.getListOfFurniture()))+".");
 			}
 			else {
-				orderForm(type.trim(),category.trim(),number,builder);
+				orderForm(builder);
 				myJDBC.updateDatabase(category.trim(),builder);
 			}
-			myJDBC.close();
 		} catch (IllegalArgumentException e) {
 			System.out.println("The furniture requested does not exist.");
 		}
 		catch(Exception e){
 			System.out.println("The system encountered an error.");
 			
+		} finally {
+			if (myJDBC != null) {
+				myJDBC.close();
+			}
 		}	
 	}
 
@@ -164,7 +167,11 @@ public class User {
 	 * @param number The number of items made
 	 * @param builder the furniture builder object
 	 */
-	public static void orderForm(String type,String category,String number,FurnitureBuilder builder) {
+	public static void orderForm(FurnitureBuilder builder) throws IllegalArgumentException{
+		if (builder.getBuildList() == null || builder.getBuildList().size() == 0) {
+			throw new IllegalArgumentException();
+		}
+
 		File form = new File(filename);
 		BufferedWriter writer = null;
 		
@@ -183,10 +190,10 @@ public class User {
 			}
 			int i=1;
 			while(form.exists()) {
-				String yes = "Orders/orderform";
-				yes += Integer.toString(i);
-				yes += ".txt";
-				filename = yes;
+				String tmp = "Orders/orderform";
+				tmp += Integer.toString(i);
+				tmp += ".txt";
+				filename = tmp;
 				i++;
 				form = new File(filename);
 			}
@@ -200,15 +207,20 @@ public class User {
 		String faculty = "";
 		String contact = "";
 		String date = "";
+
+		String type = builder.getBuildList().get(0).get(0).getType().toLowerCase();
+		String category = builder.getBuildList().get(0).get(0).getClass().getName().toLowerCase();
+		category = category.substring(category.lastIndexOf(".") + 1);
+		String number = "" + builder.getBuildList().size();
 		
 		//Now write the order to the file
 		try {
 			writer = new BufferedWriter(new FileWriter(filename));
-			writer.write("Furniture Order Form " + "\n\n" + "Faculty Name: " + faculty + "\n");
-			writer.write("Contact: " + contact +"\n" + "Date: " + date + "\n\n");
+			writer.write("Furniture Order Form\n\n" + "Faculty Name:" + faculty + "\n");
+			writer.write("Contact:" + contact +"\n" + "Date:" + date + "\n\n");
 			
 			writer.write("Original Request: ");
-			writer.write(type.toLowerCase() +" "+ category.toLowerCase() + ", " + number+ "\n\n");
+			writer.write(type +" "+ category + ", " + number + "\n\n");
 			
 			writer.write("Items Ordered" + "\n");
 			String[] ID = builder.getIds();
@@ -228,7 +240,7 @@ public class User {
 			System.out.print(" for $"+price+".");
 
 
-			writer.write("\n" +"Total Price: $" + price+".");
+			writer.write("\n" +"Total Price: $" + price);
 		}
 		catch (Exception e) {
 		      System.err.println("I/O error opening/writing file.");

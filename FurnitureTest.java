@@ -167,4 +167,26 @@ public class FurnitureTest {
 		String[] check = {"L045", "Desk", "18", "002"};
 		assertTrue("Getters in Furniture.java returned the incorrect value", Arrays.equals(info, check));
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	
+	/**
+	 * Checks how the program deals with negative
+	 * prices. Should throw an exception
+	 */
+	
+	public void testIllgalInputNegativePrice() {
+		Lamp testLamp = new Lamp("L045", "Desk", "Y", "N", -18, "002");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	
+	/**
+	 * Checks how the program deals with an 
+	 * incorrect format on parts. Should throw an exception
+	 */
+	
+	public void testIllgalInputWrondPartFormat() {
+		Lamp testLamp = new Lamp("L045", "Desk", "y", "N", 18, "002");
+	}
 }

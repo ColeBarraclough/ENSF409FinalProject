@@ -216,7 +216,7 @@ public class FurnitureBuilderTest {
 	 * if the types of the furniture don't match
 	 */
 	
-	public void buildFurnitureIllegalTypeInputTest() {
+	public void testBuildFurnitureIllegalTypeInput() {
 		FurnitureBuilder mb = new FurnitureBuilder();
 
         Lamp[] lamps = new Lamp[5];
@@ -236,7 +236,7 @@ public class FurnitureBuilderTest {
 	 * if the category of the furniture don't match
 	 */
 	
-	public void buildFurnitureIllegalCategoryInputTest() {
+	public void testBuildFurnitureIllegalCategoryInput() {
 		FurnitureBuilder mb = new FurnitureBuilder();
 
         Furniture[] furnitures = new Furniture[5];
@@ -247,5 +247,25 @@ public class FurnitureBuilderTest {
         furnitures[3] = new Lamp("L340", "Desk", "Y", "N", 10, "002");
 		furnitures[4] = new Lamp("L163", "Desk", "N", "Y", 10, "003");
 		mb.buildFurniture(furnitures, 1);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	
+	/**
+	 * Tests if build list will throw an IllegalArguementException
+	 * if the category of the furniture don't match
+	 */
+	
+	public void testBuildFurnitureIllegalAmountInput() {
+		FurnitureBuilder mb = new FurnitureBuilder();
+
+        Furniture[] furnitures = new Furniture[5];
+
+        furnitures[0] = new Lamp("L030", "Desk", "N", "Y", 10, "002");
+        furnitures[1] = new Chair("L374", "Desk", "Y", "Y", "Y", "Y", 300, "003");
+        furnitures[2] = new Lamp("L394", "Desk", "Y", "N", 11, "004");
+        furnitures[3] = new Lamp("L340", "Desk", "Y", "N", 10, "002");
+		furnitures[4] = new Lamp("L163", "Desk", "N", "Y", 10, "003");
+		mb.buildFurniture(furnitures, -1);
 	}
 }

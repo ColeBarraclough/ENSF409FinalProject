@@ -10,9 +10,13 @@ import java.util.*;
  * @author Adeshpal Virk, Hannah Oluyemisi Asaolu, Tyler Galea, Cole Barraclough
  * @since April 5, 2021
  * @version 1.1
- * {@summary} Unit tests for the functionality of FurintureBuilde.java and Management.java together.
+ * {@summary} Unit tests for the functionality of FurintureBuilder.java and Management.java together.
  *
  */
+
+  //IMPORTANT
+ // Make sure to update the database back to the origonal before running these tests
+ //IMPORTANT
 
 public class ManagementAndFurnitureBuilderTest {
 	
@@ -158,6 +162,31 @@ public class ManagementAndFurnitureBuilderTest {
 		}
 		String[][] check = {{"L013", "L208"}, {"L112", "L342"}, {"L564"}};
 		assertTrue("A non-cheapest list of lamps was returned", Arrays.deepEquals(idList, check));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	
+	/**
+	 * Makes a request for objects that don't currently exist
+	 * and expects and IllegalArgumentException
+	 */
+	
+	public void testDatabaseFurnitureBuilderIllegalInput() {
+        database.initializeConnection();
+		String[] request = {"Desk", "Lump"};
+		database.createArray(request);
+        database.toArray();
+		FurnitureBuilder mb = new FurnitureBuilder();
+		mb.buildFurniture(database.listOfFurnitures, 3);
+		ArrayList<ArrayList<Furniture>> test = mb.getBuildList();
+		String[][] idList = new String[test.size()][];
+		for(int i = 0; i < test.size(); i++){
+			idList[i] = new String[test.get(i).size()];
+			for(int j = 0; j < test.get(i).size(); j++){
+				idList[i][j] = test.get(i).get(j).getId();
+			}
+		}
+
 	}
 	
 }
