@@ -27,11 +27,11 @@ public class User {
 	/**
 	 * mysql Username 
 	 */
-	protected static final String USERNAME = "root"; //Add your username
+	protected static final String USERNAME = ""; //Add your username
 	/**
 	 * mysql Password 
 	 */
-	protected static final String PASSWORD = "Cole_8899"; //Add your password
+	protected static final String PASSWORD = ""; //Add your password
 	
 	
 	//INSTRUCTIONS TO RUN PROGRAM CAN BE FOUND IN README.md
